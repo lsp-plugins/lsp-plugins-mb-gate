@@ -170,7 +170,6 @@ namespace lsp
                     meta::mb_gate_metadata::FFT_MESH_POINTS * sizeof(uint32_t) + // vIndexes array
                     MBG_BUFFER_SIZE * sizeof(float) + // Global vBuffer for band signal processing
                     MBG_BUFFER_SIZE * sizeof(float) + // Global vEnv for band signal processing
-                    MBG_BUFFER_SIZE * sizeof(float) * 2 + // vInAnalyze + vOutAnalyze for each channel
                     // Channel buffers
                     (
                         MBG_BUFFER_SIZE * sizeof(float) + // Global vSc[] for each channel
@@ -180,6 +179,7 @@ namespace lsp
                         MBG_BUFFER_SIZE * sizeof(float) + // vBuffer for each channel
                         MBG_BUFFER_SIZE * sizeof(float) + // vScBuffer for each channel
                         ((bSidechain) ? MBG_BUFFER_SIZE * sizeof(float) : 0) + // vExtScBuffer for each channel
+                        MBG_BUFFER_SIZE * sizeof(float) * 2 + // vInAnalyze + vOutAnalyze for each channel
                         // Band buffers
                         (
                             MBG_BUFFER_SIZE * sizeof(float) + // vVCA of each band
@@ -195,7 +195,7 @@ namespace lsp
             // Remember the pointer to frequencies buffer
             vTr             = reinterpret_cast<float *>(ptr);
             ptr            += filter_mesh_size * 2;
-            vPFc             = reinterpret_cast<float *>(ptr);
+            vPFc            = reinterpret_cast<float *>(ptr);
             ptr            += filter_mesh_size * 2;
             vRFc            = reinterpret_cast<float *>(ptr);
             ptr            += filter_mesh_size * 2;

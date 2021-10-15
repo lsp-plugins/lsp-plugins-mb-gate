@@ -181,8 +181,8 @@ namespace lsp
             METER("fre" id, "Frequency range end" label, U_HZ,  mb_gate_metadata::OUT_FREQ), \
             MESH("cg" id, "Gate curve graph" label, 2, mb_gate_metadata::CURVE_MESH_SIZE), \
             MESH("hg" id, "Hysteresis graph" label, 2, mb_gate_metadata::CURVE_MESH_SIZE), \
-            METER_OUT_GAIN("elm" id, "Envelope level meter" label, GAIN_AMP_P_24_DB), \
-            METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_24_DB), \
+            METER_OUT_GAIN("elm" id, "Envelope level meter" label, GAIN_AMP_P_36_DB), \
+            METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_36_DB), \
             METER_GAIN("rlm" id, "Reduction level meter" label, GAIN_AMP_0_DB)
 
         #define MB_STEREO_BAND(id, label, x, total, fe, fs) \

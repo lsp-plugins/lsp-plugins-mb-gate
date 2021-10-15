@@ -478,18 +478,20 @@
 
 							<grid rows="5" cols="9" hspacing="0" expand="true">
 								<!-- r1,2 -->
-								<cell rows="2"><label text="labels.controls"/></cell>
-								<cell rows="2"><label text="labels.reduction"/></cell>
-								<cell rows="2"><label text="labels.makeup"/></cell>
-								<cell rows="2"><label text="labels.attack"/></cell>
-								<cell rows="2"><label text="labels.release"/></cell>
-								<cell cols="2"><label text="labels.curve" pad.t="4"/></cell>
-								<cell cols="2"><label text="labels.hysteresis"/></cell>
-
-								<cell><label text="labels.thresh_old"/></cell>
-								<cell><label text="labels.zone"/></cell>
-								<cell><label text="labels.thresh_old"/></cell>
-								<cell><label text="labels.zone" pad.b="4"/></cell>
+								<ui:with vreduce="true">
+									<cell rows="2"><label text="labels.controls"/></cell>
+									<cell rows="2"><label text="labels.reduction"/></cell>
+									<cell rows="2"><label text="labels.makeup"/></cell>
+									<cell rows="2"><label text="labels.attack"/></cell>
+									<cell rows="2"><label text="labels.release"/></cell>
+									<cell cols="2"><label text="labels.curve" pad.t="4"/></cell>
+									<cell cols="2"><label text="labels.hysteresis"/></cell>
+	
+									<label text="labels.thresh_old"/>
+									<label text="labels.zone"/>
+									<label text="labels.thresh_old"/>
+									<label text="labels.zone" pad.b="4"/>
+								</ui:with>
 
 								<!-- r3 -->
 								<cell cols="9"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
