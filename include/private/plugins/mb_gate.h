@@ -222,7 +222,7 @@ namespace lsp
                 explicit mb_gate(const meta::plugin_t *metadata, bool sc, size_t mode);
                 virtual ~mb_gate();
 
-                virtual void        init(plug::IWrapper *wrapper);
+                virtual void        init(plug::IWrapper *wrapper, plug::IPort **ports);
                 virtual void        destroy();
 
             public:
