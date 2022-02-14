@@ -509,7 +509,16 @@ namespace lsp
             PORTS_END
         };
 
-        // Multiband gate
+        const meta::bundle_t mb_gate_bundle =
+        {
+            "mb_gate",
+            "Multiband Gate",
+            B_MB_DYNAMICS,
+            "7GOAM1O_RdY",
+            "This plugin performs multiband gating of input signsl. Flexible sidechain\ncontrol configuration provided. As opposite to most available multiband\ngates, this gate provides numerous special functions: 'modern' operating\nmode, 'Sidechain boost', 'Lookahead' option and up to 8 frequency bands."
+        };
+
+        // Multiband Gate
         const meta::plugin_t  mb_gate_mono =
         {
             "Multi-band Gate Mono x8",
@@ -528,7 +537,8 @@ namespace lsp
             mb_gate_mono_ports,
             "dynamics/gate/multiband/mono.xml",
             NULL,
-            mono_plugin_port_groups
+            mono_plugin_port_groups,
+            &mb_gate_bundle
         };
 
         const meta::plugin_t  mb_gate_stereo =
@@ -549,7 +559,8 @@ namespace lsp
             mb_gate_stereo_ports,
             "dynamics/gate/multiband/stereo.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &mb_gate_bundle
         };
 
         const meta::plugin_t  mb_gate_lr =
@@ -570,7 +581,8 @@ namespace lsp
             mb_gate_lr_ports,
             "dynamics/gate/multiband/lr.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &mb_gate_bundle
         };
 
         const meta::plugin_t  mb_gate_ms =
@@ -591,7 +603,8 @@ namespace lsp
             mb_gate_ms_ports,
             "dynamics/gate/multiband/ms.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &mb_gate_bundle
         };
 
 
@@ -613,7 +626,8 @@ namespace lsp
             sc_mb_gate_mono_ports,
             "dynamics/gate/multiband/mono.xml",
             NULL,
-            mono_plugin_sidechain_port_groups
+            mono_plugin_sidechain_port_groups,
+            &mb_gate_bundle
         };
 
         const meta::plugin_t  sc_mb_gate_stereo =
@@ -634,7 +648,8 @@ namespace lsp
             sc_mb_gate_stereo_ports,
             "dynamics/gate/multiband/stereo.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &mb_gate_bundle
         };
 
         const meta::plugin_t  sc_mb_gate_lr =
@@ -655,7 +670,8 @@ namespace lsp
             sc_mb_gate_lr_ports,
             "dynamics/gate/multiband/lr.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &mb_gate_bundle
         };
 
         const meta::plugin_t  sc_mb_gate_ms =
@@ -676,7 +692,8 @@ namespace lsp
             sc_mb_gate_ms_ports,
             "dynamics/gate/multiband/ms.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &mb_gate_bundle
         };
     } // namespace meta
 } // namespace lsp
