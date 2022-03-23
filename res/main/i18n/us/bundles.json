@@ -1,0 +1,7 @@
+{
+	"mb_gate": {
+		"name": "Multiband Gate",
+		"description": "This plugin performs multiband gating of input signsl. Flexible sidechain\ncontrol configuration provided. As opposite to most available multiband\ngates, this gate provides numerous special functions: 'modern' operating\nmode, 'Sidechain boost', 'Lookahead' option and up to 8 frequency bands."
+	}
+}
+
