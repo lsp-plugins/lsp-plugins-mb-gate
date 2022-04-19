@@ -645,7 +645,7 @@ namespace lsp
                         b->sEQ[0].destroy();
                         b->sEQ[1].destroy();
                         b->sSC.destroy();
-                        b->sDelay.destroy();
+                        b->sScDelay.destroy();
 
                         b->sPassFilter.destroy();
                         b->sRejFilter.destroy();
@@ -853,7 +853,7 @@ namespace lsp
                         b->bEnabled     = enabled;
                         b->nSync       |= S_DYN_CURVE;
                         if (!enabled)
-                            b->sDelay.clear(); // Clear delay buffer from artifacts
+                            b->sScDelay.clear(); // Clear delay buffer from artifacts
                     }
                     if (b->bSolo != solo)
                     {
@@ -1079,7 +1079,7 @@ namespace lsp
                 for (size_t j=0; j<c->nPlanSize; ++j)
                 {
                     gate_band_t *b   = c->vPlan[j];
-                    b->sDelay.set_delay(latency - b->nLookahead);
+                    b->sScDelay.set_delay(latency - b->nLookahead);
                 }
                 c->sDelay.set_delay(latency);
             }
@@ -1113,7 +1113,7 @@ namespace lsp
 
                     b->sSC.set_sample_rate(sr);
                     b->sGate.set_sample_rate(sr);
-                    b->sDelay.init(max_delay);
+                    b->sScDelay.init(max_delay);
 
                     b->sPassFilter.set_sample_rate(sr);
                     b->sRejFilter.set_sample_rate(sr);
@@ -1231,7 +1231,7 @@ namespace lsp
 
                         // Preprocess VCA signal
                         b->sSC.process(vBuffer, const_cast<const float **>(vSc), to_process); // Band now contains processed by sidechain signal
-                        b->sDelay.process(vBuffer, vBuffer, b->fScPreamp, to_process); // Apply sidechain preamp and lookahead delay
+                        b->sScDelay.process(vBuffer, vBuffer, b->fScPreamp, to_process); // Apply sidechain preamp and lookahead delay
 
                         if (b->bEnabled)
                         {
@@ -1289,7 +1289,7 @@ namespace lsp
                         for (size_t j=0; j<c->nPlanSize; ++j)
                         {
                             gate_band_t *b       = c->vPlan[j];
-                            sFilters.process(b->nFilterID, c->vBuffer, c->vBuffer, b->vVCA, to_process);
+                            sFilters.process(b->nFilterID, c->vBuffer, c->vInBuffer, b->vVCA, to_process);
                         }
                     }
                 }
@@ -1643,7 +1643,7 @@ namespace lsp
                             v->write_object("sPassFilter", &b->sPassFilter);
                             v->write_object("sRejFilter", &b->sRejFilter);
                             v->write_object("sAllFilter", &b->sAllFilter);
-                            v->write_object("sDelay", &b->sDelay);
+                            v->write_object("sDelay", &b->sScDelay);
 
                             v->write("vTr", b->vTr);
                             v->write("vVCA", b->vVCA);
