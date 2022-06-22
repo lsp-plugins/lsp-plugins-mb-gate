@@ -1,0 +1,7 @@
+{
+	"mb_gate": {
+		"name": "Multiband Gate",
+		"description": "Dieses Plugin stellt ein Multibandgate des Eingangssignals zur Verfügung. \nEine flexible Sidechainsteuerung ist verfügbar. Im Gegensatz zu anderen Multibandgates, \nstellt dieses Gate auch folgende Funktionen zur Verfügung: \n'moderner' Operationsmodus, 'Sidechain Boost', 'Vorschau'\n-Option und bis zu 8 bearbeitbare Frequenzbänder."
+	}
+}
+

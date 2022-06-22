@@ -24,7 +24,7 @@ ARTIFACT_NAME               = lsp-plugins-mb-gate
 ARTIFACT_TYPE               = plug
 ARTIFACT_DESC               = LSP Multiband Gate Plugin Series
 ARTIFACT_HEADERS            = lsp-plug.in
-ARTIFACT_VERSION            = 1.0.2
+ARTIFACT_VERSION            = 1.0.3
 
 
 
