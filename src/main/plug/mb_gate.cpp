@@ -329,6 +329,7 @@ namespace lsp
                     b->bMute            = false;
                     b->bSolo            = false;
                     b->bExtSc           = false;
+                    b->nSync            = S_ALL;
                     b->nFilterID        = filter_cid++;
 
                     b->pExtSc           = NULL;
