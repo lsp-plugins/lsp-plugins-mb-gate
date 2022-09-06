@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.5 ===
+
+
 === 1.0.4 ===
 * Now gate allows to work in reverse-operation mode.
 * Assigned more correct names for sidechain types.
