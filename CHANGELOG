@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.6 ===
+
+
 === 1.0.5 ===
 * Added 'Min' and 'Max' sidechain sources for the multiband gate.
 * Updated build scripts and dependencies.
