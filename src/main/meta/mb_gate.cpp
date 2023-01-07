@@ -41,7 +41,9 @@ namespace lsp
     {
         //-------------------------------------------------------------------------
         // Multiband gate
-        static const int mb_gate_classes[] = { C_GATE, -1 };
+        static const int plugin_classes[]           = { C_GATE, -1 };
+        static const int clap_features_mono[]       = { CF_AUDIO_EFFECT, CF_MONO, -1 };
+        static const int clap_features_stereo[]     = { CF_AUDIO_EFFECT, CF_STEREO, -1 };
 
         static const port_item_t mb_gate_sc_modes[] =
         {
@@ -533,8 +535,10 @@ namespace lsp
             "bmhh",
             LSP_LADSPA_MB_GATE_BASE + 0,
             LSP_LADSPA_URI("mb_gate_mono"),
+            LSP_CLAP_URI("mb_gate_mono"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_mono_ports,
             "dynamics/gate/multiband/mono.xml",
@@ -555,8 +559,10 @@ namespace lsp
             "ysu1",
             LSP_LADSPA_MB_GATE_BASE + 1,
             LSP_LADSPA_URI("mb_gate_stereo"),
+            LSP_CLAP_URI("mb_gate_stereo"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_stereo_ports,
             "dynamics/gate/multiband/stereo.xml",
@@ -577,8 +583,10 @@ namespace lsp
             "etaj",
             LSP_LADSPA_MB_GATE_BASE + 2,
             LSP_LADSPA_URI("mb_gate_lr"),
+            LSP_CLAP_URI("mb_gate_lr"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_lr_ports,
             "dynamics/gate/multiband/lr.xml",
@@ -599,8 +607,10 @@ namespace lsp
             "x9nr",
             LSP_LADSPA_MB_GATE_BASE + 3,
             LSP_LADSPA_URI("mb_gate_ms"),
+            LSP_CLAP_URI("mb_gate_ms"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_ms_ports,
             "dynamics/gate/multiband/ms.xml",
@@ -622,8 +632,10 @@ namespace lsp
             "mhz8",
             LSP_LADSPA_MB_GATE_BASE + 4,
             LSP_LADSPA_URI("sc_mb_gate_mono"),
+            LSP_CLAP_URI("sc_mb_gate_mono"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_mono_ports,
             "dynamics/gate/multiband/mono.xml",
@@ -644,8 +656,10 @@ namespace lsp
             "rvja",
             LSP_LADSPA_MB_GATE_BASE + 5,
             LSP_LADSPA_URI("sc_mb_gate_stereo"),
+            LSP_CLAP_URI("sc_mb_gate_stereo"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_stereo_ports,
             "dynamics/gate/multiband/stereo.xml",
@@ -666,8 +680,10 @@ namespace lsp
             "fhfk",
             LSP_LADSPA_MB_GATE_BASE + 6,
             LSP_LADSPA_URI("sc_mb_gate_lr"),
+            LSP_CLAP_URI("sc_mb_gate_lr"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_lr_ports,
             "dynamics/gate/multiband/lr.xml",
@@ -688,8 +704,10 @@ namespace lsp
             "ukzs",
             LSP_LADSPA_MB_GATE_BASE + 7,
             LSP_LADSPA_URI("sc_mb_gate_ms"),
+            LSP_CLAP_URI("sc_mb_gate_ms"),
             LSP_PLUGINS_MB_GATE_VERSION,
-            mb_gate_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_ms_ports,
             "dynamics/gate/multiband/ms.xml",
@@ -697,5 +715,5 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
         };
-    } // namespace meta
-} // namespace lsp
+    } /* namespace meta */
+} /* namespace lsp */
