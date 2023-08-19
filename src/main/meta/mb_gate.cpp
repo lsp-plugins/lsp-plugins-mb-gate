@@ -88,8 +88,9 @@ namespace lsp
 
         static const port_item_t mb_global_gate_modes[] =
         {
-            { "Classic",        "multiband.classic" },
-            { "Modern",         "multiband.modern" },
+            { "Classic",        "multiband.classic"         },
+            { "Modern",         "multiband.modern"          },
+            { "Linear Phase",   "multiband.linear_phase"    },
             { NULL, NULL }
         };
 
