@@ -238,9 +238,12 @@ namespace lsp
                 static size_t                       select_fft_rank(size_t sample_rate);
                 static void                         process_band(void *object, void *subject, size_t band, const float *data, size_t sample, size_t count);
 
+            protected:
+                void                do_destroy();
+
             public:
                 explicit mb_gate(const meta::plugin_t *metadata, bool sc, size_t mode);
-                virtual ~mb_gate();
+                virtual ~mb_gate() override;
 
                 virtual void        init(plug::IWrapper *wrapper, plug::IPort **ports) override;
                 virtual void        destroy() override;
