@@ -69,7 +69,7 @@
 					<ui:for id="i" first="1" last="7">
 						<mesh id="bfc_${i}" width="2" fill="true" smooth="true" color="graph_mesh_cycle" color.hue=":hue_${i}" fcolor="graph_mesh_cycle" fcolor.hue=":hue_${i}" fcolor.a="0.9" visibility=":flt and :cbe_${i}"/>
 					</ui:for>
-					
+
 					<mesh id="ifg" width="0" color="mono_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="mono_in" visibility=":ife"/>
 					<mesh id="ofg" width="3" color="mono" visibility=":ofe"/>
 					<mesh id="ag" width="3" color="mono" smooth="true"/>
@@ -419,7 +419,7 @@
 										<knob id="sclf_${i}" size="16" ssize="3" scolor="(:sclc_${i} ieq 0) ? 'cycle_inactive' : 'cycle'" pad.v="4" pad.l="4" scolor.hue=":hue_${i}" bg.bright="(:sclc_${i} ieq 0) ? :const_bg_darken : 1.0"/>
 										<value id="sclf_${i}" pad.h="6" bg.bright="(:sclc_${i} ieq 0) ? :const_bg_darken : 1.0" bright="(:sclc_${i} ieq 0) ? 0.75 : 1.0" width.min="30"/>
 
-										<knob id="schf_${i}" size="16" ssize="3" scolor="(:sclc_${i} ieq 0) ? 'cycle_inactive' : 'cycle'" pad.v="4" pad.l="4" scolor.hue=":hue_${i}" bg.bright="(:schc_${i} ieq 0) ? :const_bg_darken : 1.0"/>
+										<knob id="schf_${i}" size="16" ssize="3" scolor="(:schc_${i} ieq 0) ? 'cycle_inactive' : 'cycle'" pad.v="4" pad.l="4" scolor.hue=":hue_${i}" bg.bright="(:schc_${i} ieq 0) ? :const_bg_darken : 1.0"/>
 										<value id="schf_${i}" pad.h="6" bg.bright="(:schc_${i} ieq 0) ? :const_bg_darken : 1.0" bright="(:schc_${i} ieq 0) ? 0.75 : 1.0" width.min="30"/>
 
 									</grid>
