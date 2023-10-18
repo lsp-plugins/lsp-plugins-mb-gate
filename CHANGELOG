@@ -3,7 +3,7 @@
 *******************************************************************************
 
 === 1.0.15 ===
-
+* Reduced CPU consumption for Linear Phase and Modern modes.
 
 === 1.0.14 ===
 * Updated build scripts and dependencies.

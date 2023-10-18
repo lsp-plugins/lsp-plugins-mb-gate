@@ -305,6 +305,7 @@ namespace lsp
                         (
                             MBG_BUFFER_SIZE * sizeof(float) + // vBuffer of each band
                             MBG_BUFFER_SIZE * sizeof(float) + // vVCA of each band
+                            meta::mb_gate_metadata::FFT_MESH_POINTS * 2 * sizeof(float) + // vSc transfer function for each band
                             meta::mb_gate_metadata::FFT_MESH_POINTS * 2 * sizeof(float) // vTr transfer function for each band
                         ) * meta::mb_gate_metadata::BANDS_MAX
                     ) * channels;
@@ -444,6 +445,8 @@ namespace lsp
                     ptr                += MBG_BUFFER_SIZE * sizeof(float);
                     b->vVCA             = reinterpret_cast<float *>(ptr);
                     ptr                += MBG_BUFFER_SIZE * sizeof(float);
+                    b->vSc              = reinterpret_cast<float *>(ptr);
+                    ptr                += meta::mb_gate_metadata::FFT_MESH_POINTS * sizeof(float) * 2;
                     b->vTr              = reinterpret_cast<float *>(ptr);
                     ptr                += meta::mb_gate_metadata::FFT_MESH_POINTS * sizeof(float) * 2;
 
@@ -989,7 +992,7 @@ namespace lsp
                         gate_band_t *b  = c->vPlan[j];
                         size_t band     = b - c->vBands;
                         b->pFreqEnd->set_value(b->fFreqEnd);
-                        b->nSync       |= S_EQ_CURVE;
+                        b->nSync       |= S_EQ_CURVE | S_BAND_CURVE;;
 
                         lsp_trace("plan[%d] start=%f, end=%f", int(j), b->fFreqStart, b->fFreqEnd);
 
@@ -1020,8 +1023,8 @@ namespace lsp
                         }
 
                         // Update transfer function for equalizer
-                        b->sEQ[0].freq_chart(b->vTr, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::pcomplex_mod(b->vTr, b->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        b->sEQ[0].freq_chart(b->vSc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        dsp::pcomplex_mod(b->vSc, b->vSc, meta::mb_gate_metadata::FFT_MESH_POINTS);
 
                         // Update filter parameters, depending on operating mode
                         if (enXOver == XOVER_MODERN)
@@ -1520,39 +1523,49 @@ namespace lsp
                 }
                 else if (enXOver == XOVER_CLASSIC)
                 {
-                    dsp::pcomplex_fill_ri(vTr, 1.0f, 0.0f, meta::mb_gate_metadata::FFT_MESH_POINTS);   // vBuffer
-                    dsp::fill_zero(c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS*2);                 // c->vBuffer
-
                     // Calculate transfer function
                     for (size_t j=0; j<c->nPlanSize; ++j)
                     {
-                        gate_band_t *b       = c->vPlan[j];
+                        gate_band_t *bp     = (j > 0) ? c->vPlan[j-1] : NULL;
+                        gate_band_t *b      = c->vPlan[j];
 
-                        // Apply all-pass characteristics
-                        b->sAllFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::pcomplex_mul2(c->vTr, vPFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        if (b->nSync & S_BAND_CURVE)
+                        {
+                            if (bp)
+                            {
+                                bp->sRejFilter.freq_chart(vRFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                dsp::pcomplex_mul2(vPFc, vRFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            }
+                            else
+                                b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
 
-                        // Apply lo-pass filter characteristics
-                        b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::pcomplex_mul2(vPFc, vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::fmadd_k3(c->vTr, vPFc, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS*2);
-
-                        // Apply hi-pass filter characteristics
-                        b->sRejFilter.freq_chart(vRFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::pcomplex_mul2(vTr, vRFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            dsp::pcomplex_mod(b->vTr, vPFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            b->nSync           &= ~size_t(S_BAND_CURVE);
+                        }
+                        if (j == 0)
+                            dsp::mul_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        else
+                            dsp::fmadd_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
                     }
-                    dsp::pcomplex_mod(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                    dsp::copy(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
                 }
                 else // enXOver == XOVER_LINEAR_PHASE
                 {
-                    dsp::fill_zero(c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
                     // Calculate transfer function
                     for (size_t j=0; j<c->nPlanSize; ++j)
                     {
                         gate_band_t *b      = c->vPlan[j];
                         size_t band         = b - c->vBands;
-                        c->sFFTXOver.freq_chart(band, vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::fmadd_k3(c->vTr, vPFc, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        if (b->nSync & S_BAND_CURVE)
+                        {
+                            c->sFFTXOver.freq_chart(band, b->vTr, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            b->nSync           &= ~size_t(S_BAND_CURVE);
+                        }
+                        if (j == 0)
+                            dsp::mul_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        else
+                            dsp::fmadd_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
                     }
                     dsp::copy(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
                 }
@@ -1579,11 +1592,11 @@ namespace lsp
 
                             // Fill mesh
                             dsp::copy(&mesh->pvData[0][1], vFreqs, meta::mb_gate_metadata::MESH_POINTS);
-                            dsp::mul_k3(&mesh->pvData[1][1], b->vTr, b->fScPreamp, meta::mb_gate_metadata::MESH_POINTS);
+                            dsp::mul_k3(&mesh->pvData[1][1], b->vSc, b->fScPreamp, meta::mb_gate_metadata::MESH_POINTS);
                             mesh->data(2, meta::mb_gate_metadata::FILTER_MESH_POINTS);
 
                             // Mark mesh as synchronized
-                            b->nSync           &= ~S_EQ_CURVE;
+                            b->nSync           &= ~size_t(S_EQ_CURVE);
                         }
                     }
 
@@ -1613,7 +1626,7 @@ namespace lsp
                         }
 
                         // Mark mesh as synchronized
-                        b->nSync           &= ~(S_GATE_CURVE << j);
+                        b->nSync           &= ~size_t(S_GATE_CURVE << j);
                     }
                 }
 
@@ -1818,6 +1831,7 @@ namespace lsp
                             v->write_object("sAllFilter", &b->sAllFilter);
                             v->write_object("sDelay", &b->sScDelay);
 
+                            v->write("vSc", b->vSc);
                             v->write("vTr", b->vTr);
                             v->write("vVCA", b->vVCA);
                             v->write("fScPreamp", b->fScPreamp);
