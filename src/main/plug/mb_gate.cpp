@@ -28,7 +28,7 @@
 #include <lsp-plug.in/dsp-units/units.h>
 #include <lsp-plug.in/shared/id_colors.h>
 
-#define MBG_BUFFER_SIZE         0x400
+#define MBG_BUFFER_SIZE         0x1000U
 
 namespace lsp
 {
@@ -277,6 +277,8 @@ namespace lsp
             sAnalyzer.set_envelope(dspu::envelope::WHITE_NOISE);
             sAnalyzer.set_window(meta::mb_gate_metadata::FFT_WINDOW);
             sAnalyzer.set_rate(meta::mb_gate_metadata::FFT_REFRESH_RATE);
+
+            sCounter.set_frequency(meta::mb_gate_metadata::FFT_REFRESH_RATE, true);
 
             size_t filter_mesh_size = align_size(meta::mb_gate_metadata::FFT_MESH_POINTS * sizeof(float), DEFAULT_ALIGN);
 
@@ -1182,6 +1184,7 @@ namespace lsp
             // Update analyzer's sample rate
             sAnalyzer.set_sample_rate(sr);
             sFilters.set_sample_rate(sr);
+            sCounter.set_sample_rate(sr, true);
             bEnvUpdate          = true;
 
             // Update channels
@@ -1268,10 +1271,10 @@ namespace lsp
             }
 
             // Do processing
-            while (samples > 0)
+            for (size_t offset = 0; offset < samples; )
             {
                 // Determine buffer size for processing
-                size_t to_process   = (samples > MBG_BUFFER_SIZE) ? MBG_BUFFER_SIZE : samples;
+                size_t to_process   = lsp_min(MBG_BUFFER_SIZE, samples - offset);
 
                 // Measure input signal level
                 for (size_t i=0; i<channels; ++i)
@@ -1499,75 +1502,80 @@ namespace lsp
                     if (c->vScIn != NULL)
                         c->vScIn           += to_process;
                 }
-                samples    -= to_process;
-            } // while (samples > 0)
+                offset     += to_process;
+            }
+
+            sCounter.submit(samples);
 
             // Output FFT curves for each channel
             for (size_t i=0; i<channels; ++i)
             {
                 channel_t *c     = &vChannels[i];
 
-                // Calculate transfer function for the gate
-                if (enXOver == XOVER_MODERN)
+                // Update transfer function, limit the number of updates to the refresh rate
+                if (sCounter.fired())
                 {
-                    dsp::pcomplex_fill_ri(c->vTr, 1.0f, 0.0f, meta::mb_gate_metadata::FFT_MESH_POINTS);
-
-                    // Calculate transfer function
-                    for (size_t j=0; j<c->nPlanSize; ++j)
+                    if (enXOver == XOVER_MODERN)
                     {
-                        gate_band_t *b       = c->vPlan[j];
-                        sFilters.freq_chart(b->nFilterID, vTr, vFreqs, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        dsp::pcomplex_mul2(c->vTr, vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                    }
-                    dsp::pcomplex_mod(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                }
-                else if (enXOver == XOVER_CLASSIC)
-                {
-                    // Calculate transfer function
-                    for (size_t j=0; j<c->nPlanSize; ++j)
-                    {
-                        gate_band_t *bp     = (j > 0) ? c->vPlan[j-1] : NULL;
-                        gate_band_t *b      = c->vPlan[j];
+                        dsp::pcomplex_fill_ri(c->vTr, 1.0f, 0.0f, meta::mb_gate_metadata::FFT_MESH_POINTS);
 
-                        if (b->nSync & S_BAND_CURVE)
+                        // Calculate transfer function
+                        for (size_t j=0; j<c->nPlanSize; ++j)
                         {
-                            if (bp)
+                            gate_band_t *b       = c->vPlan[j];
+                            sFilters.freq_chart(b->nFilterID, vTr, vFreqs, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            dsp::pcomplex_mul2(c->vTr, vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        }
+                        dsp::pcomplex_mod(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                    }
+                    else if (enXOver == XOVER_CLASSIC)
+                    {
+                        // Calculate transfer function
+                        for (size_t j=0; j<c->nPlanSize; ++j)
+                        {
+                            gate_band_t *bp     = (j > 0) ? c->vPlan[j-1] : NULL;
+                            gate_band_t *b      = c->vPlan[j];
+
+                            if (b->nSync & S_BAND_CURVE)
                             {
-                                bp->sRejFilter.freq_chart(vRFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                                b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                                dsp::pcomplex_mul2(vPFc, vRFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                            }
-                            else
-                                b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                if (bp)
+                                {
+                                    bp->sRejFilter.freq_chart(vRFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                    b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                    dsp::pcomplex_mul2(vPFc, vRFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                }
+                                else
+                                    b->sPassFilter.freq_chart(vPFc, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
 
-                            dsp::pcomplex_mod(b->vTr, vPFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                            b->nSync           &= ~size_t(S_BAND_CURVE);
+                                dsp::pcomplex_mod(b->vTr, vPFc, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                b->nSync           &= ~size_t(S_BAND_CURVE);
+                            }
+                            if (j == 0)
+                                dsp::mul_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            else
+                                dsp::fmadd_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
                         }
-                        if (j == 0)
-                            dsp::mul_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        else
-                            dsp::fmadd_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        dsp::copy(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
                     }
-                    dsp::copy(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                }
-                else // enXOver == XOVER_LINEAR_PHASE
-                {
-                    // Calculate transfer function
-                    for (size_t j=0; j<c->nPlanSize; ++j)
+                    else // enXOver == XOVER_LINEAR_PHASE
                     {
-                        gate_band_t *b      = c->vPlan[j];
-                        size_t band         = b - c->vBands;
-                        if (b->nSync & S_BAND_CURVE)
+                        // Calculate transfer function
+                        for (size_t j=0; j<c->nPlanSize; ++j)
                         {
-                            c->sFFTXOver.freq_chart(band, b->vTr, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                            b->nSync           &= ~size_t(S_BAND_CURVE);
+                            gate_band_t *b      = c->vPlan[j];
+                            size_t band         = b - c->vBands;
+                            if (b->nSync & S_BAND_CURVE)
+                            {
+                                c->sFFTXOver.freq_chart(band, b->vTr, vFreqs, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                                b->nSync           &= ~size_t(S_BAND_CURVE);
+                            }
+                            if (j == 0)
+                                dsp::mul_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                            else
+                                dsp::fmadd_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
                         }
-                        if (j == 0)
-                            dsp::mul_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
-                        else
-                            dsp::fmadd_k3(c->vTr, b->vTr, b->fGainLevel, meta::mb_gate_metadata::FFT_MESH_POINTS);
+                        dsp::copy(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
                     }
-                    dsp::copy(c->vTrMem, c->vTr, meta::mb_gate_metadata::FFT_MESH_POINTS);
                 }
 
                 // Output FFT curve, compression curve and FFT spectrogram for each band
@@ -1682,8 +1690,10 @@ namespace lsp
             } // for channel
 
             // Request for redraw
-            if (pWrapper != NULL)
+            if ((pWrapper != NULL) && (sCounter.fired()))
                 pWrapper->query_display_draw();
+
+            sCounter.commit();
         }
 
         bool mb_gate::inline_display(plug::ICanvas *cv, size_t width, size_t height)
@@ -1793,6 +1803,7 @@ namespace lsp
 
             v->write_object("sAnalyzer", &sAnalyzer);
             v->write_object("sFilters", &sFilters);
+            v->write_object("sCounter", &sCounter);
             v->write("nMode", nMode);
             v->write("bSidechain", bSidechain);
             v->write("bEnvUpdate", bEnvUpdate);
