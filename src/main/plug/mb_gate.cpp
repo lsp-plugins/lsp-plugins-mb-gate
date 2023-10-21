@@ -28,7 +28,7 @@
 #include <lsp-plug.in/dsp-units/units.h>
 #include <lsp-plug.in/shared/id_colors.h>
 
-#define MBG_BUFFER_SIZE         0x1000U
+#define MBG_BUFFER_SIZE         0x400U
 
 namespace lsp
 {
