@@ -69,10 +69,10 @@
 					<ui:for id="i" first="1" last="7">
 						<mesh id="bfc_${i}" width="2" fill="true" smooth="true" color="graph_mesh_cycle" color.hue=":hue_${i}" fcolor="graph_mesh_cycle" fcolor.hue=":hue_${i}" fcolor.a="0.9" visibility=":flt and :cbe_${i}"/>
 					</ui:for>
-					<mesh id="ifg_l" width="0" color="left_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="left_in" visibility=":ife_l"/>
-					<mesh id="ifg_r" width="0" color="right_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="right_in" visibility=":ife_r"/>
-					<mesh id="ofg_l" width="3" color="left" visibility=":ofe_l"/>
-					<mesh id="ofg_r" width="3" color="right" visibility=":ofe_r"/>
+					<mesh id="ifg_l" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="0" color="left_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="left_in" visibility=":ife_l"/>
+					<mesh id="ifg_r" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="0" color="right_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="right_in" visibility=":ife_r"/>
+					<mesh id="ofg_l" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="3" color="left" visibility=":ofe_l"/>
+					<mesh id="ofg_r" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="3" color="right" visibility=":ofe_r"/>
 
 					<mesh id="ag_l" width="3" color="bright_cyan" smooth="true" visibility="!:ssplit"/>
 					<mesh id="ag_l" width="3" color="left" smooth="true" visibility=":ssplit"/>
@@ -86,6 +86,7 @@
 					<axis min="10" max="24000" angle="0.0" log="true" visibility="false"/>
 					<axis min="-72 db / (:zoom ** 3)" max="24 db * :zoom" color="graph_prim" angle="0.5" log="true"/>
 					<axis min="-1" max="1" visibility="false" angle="0.5"/>
+					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 
 					<!-- Text -->
 					<ui:with ox="0" oy="2" y="0" halign="1" valign="1">
@@ -241,7 +242,7 @@
 		<!-- down part -->
 		<hbox>
 
-			<cgroup id="bsel" embed.h=":bsel ilt 1" embed.b=":bsel ilt 1">
+			<cgroup id="bsel" embed.h=":bsel ilt 1" embed.b=":bsel ilt 1" width.min="855" height.min="305">
 				<grid rows="9" cols="25" transpose="true">
 					<!-- Labels -->
 					<label text="labels.band" pad.v="4" bg.color="bg_schema" hreduce="true"/>
@@ -273,7 +274,7 @@
 									<button text="labels.chan.num_id" text:id="${i}" value="1" editable="false" pointer="arrow" hfill="true" ui:inject="Button_ne_Cycle" height="19" pad.h="6" pad.v="4"/>
 								</cell>
 								<cell cols="2" fill="false">
-									<vbox height.min="40">
+									<vbox height="36" vreduce="true">
 										<label text="0"/>
 										<value id="fre_${i}" width.min="30" sline="true" detailed="false"/>
 									</vbox>
@@ -305,7 +306,7 @@
 							</ui:if>
 
 							<cell cols="2" pad.h="6" bg.color="bg_schema">
-								<grid rows="2" cols="1" hspacing="4">
+								<grid rows="2" cols="1" hspacing="4" vreduce="true">
 									<button
 										id="ge_${i}"
 										text="labels.chan.on"
@@ -337,7 +338,7 @@
 
 							<!-- Column 2 -->
 							<ui:if test=":i ine 0">
-								<vbox>
+								<vbox height="36" vreduce="true">
 									<value id="sf_${i}" width.min="30" detailed="false" visibility=":cbe_${i}"/>
 									<value id="fre_${i}" detailed="false"/>
 									<label text="labels.chan.off" visibility="not :cbe_${i}"/>
@@ -381,7 +382,7 @@
 										<cell cols="8"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
 
 										<cell rows="2">
-											<vbox vfill="false" spacing="4" pad.l="6" pad.v="4">
+											<vbox vfill="false" spacing="4" pad.l="6" pad.v="4" width.min="97">
 												<combo id="scm_${i}" fill="true"/>
 												<combo id="scs_${i}" fill="true" visibility="!:ssplit" />
 												<combo id="sscs_${i}" fill="true" visibility=":ssplit" />
@@ -507,7 +508,7 @@
 							</align>
 							<hsep vreduce="true"/>
 
-							<grid rows="5" cols="9" hspacing="0" expand="true">
+							<grid rows="7" cols="9" hspacing="0" expand="true">
 								<!-- r1,2 -->
 								<ui:with vreduce="true">
 									<cell rows="2"><label text="labels.controls"/></cell>
@@ -580,6 +581,8 @@
 									<value id="ht_${i}" bright="(:gh_${i} igt 0) ? 1 : 0.75" bg.bright="(:gh_${i} igt 0) ? 1 : :const_bg_darken"/>
 									<value id="hz_${i}" bright="(:gh_${i} igt 0) ? 1 : 0.75" bg.bright="(:gh_${i} igt 0) ? 1 : :const_bg_darken"/>
 								</ui:with>
+								<cell cols="9"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
+								<cell cols="9"><void fill="true" expand="true"/></cell>
 
 							</grid>
 						</vbox>
