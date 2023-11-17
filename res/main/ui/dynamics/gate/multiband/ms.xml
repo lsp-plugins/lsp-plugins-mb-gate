@@ -245,11 +245,11 @@
 		<!-- down part -->
 		<hbox>
 
-			<cgroup id="bsel" embed.h=":bsel ilt 2" embed.b=":bsel ilt 2" width.min="873" height.min="424">
+			<cgroup id="bsel" embed.h=":bsel ilt 2" embed.b=":bsel ilt 2" width.min="880" height.min="424">
 				<ui:for id="c" first="0" last="1">
 					<ui:eval id="channel" value="(:c ieq 0) ? 'num_id_M_id' : 'num_id_S_ide'"/>
 
-					<grid rows="9" cols="25" transpose="true">
+					<grid rows="11" cols="25" transpose="true">
 						<!-- Labels -->
 						<label text="labels.band" pad.v="4" bg.color="bg_schema" hreduce="true"/>
 						<vbox pad.v="4">
@@ -266,17 +266,20 @@
 						<cell rows="2" pad.v="4">
 							<label text="labels.thresh_zone:db_db" bg.color="bg_schema"/>
 						</cell>
+						<cell rows="2">
+							<void bg.color="bg_schema"/>
+						</cell>
 
 						<!-- Bands -->
 						<ui:for id="i" first="0" last="7">
 							<ui:set id="ch" value="${:i}${(:c ieq 0) ? 'm' : 's'}"/>
 
-							<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 								<!-- Column 1 -->
 								<ui:if test=":i ieq 0">
 									<!-- Separator -->
 									<cell rows="11"><vsep pad.h="2" bg.color="bg" hreduce="true"/></cell>
 
+									<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 									<cell cols="2" bg.color="bg_schema">
 										<button text="labels.chan.${channel}" text:id="${i}" value="1" editable="false" pointer="arrow" hfill="true" ui:inject="Button_ne_Cycle" height="19" pad.h="6" pad.v="4"/>
 									</cell>
@@ -286,12 +289,14 @@
 											<value id="fre_${ch}" width.min="30" sline="true" detailed="false"/>
 										</vbox>
 									</cell>
+								</ui:with>
 								</ui:if>
 
 								<ui:if test=":i ine 0">
 									<!-- Separator -->
-									<cell rows="11"><vsep pad.h="2" bg.color="bg" hreduce="true"/></cell>
+									<cell rows="9"><vsep pad.h="2" bg.color="bg" hreduce="true"/></cell>
 
+									<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 									<cell cols="2" bg.color="bg_schema">
 										<button
 											id="cbe_${ch}"
@@ -310,7 +315,10 @@
 											pad.v="4"/>
 									</cell>
 									<knob id="sf_${ch}" size="16" ssize="3" pad.v="4" scolor="((${i} ieq 0) or :cbe_${ch}) ? 'cycle' : 'cycle_inactive'" scolor.hue=":hue_${ch}"/>
+								</ui:with>
 								</ui:if>
+
+								<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 								<cell cols="2" pad.h="6" bg.color="bg_schema">
 									<grid rows="2" cols="1" hspacing="4" vreduce="true">
 										<button
@@ -342,6 +350,11 @@
 
 								<knob id="gt_${ch}" size="16" ssize="3" pad.t="4" scolor="((${i} ieq 0) or :cbe_${ch}) ? 'threshold' : 'threshold_inactive'" bg.color="bg_schema"/>
 								<value id="gt_${ch}" pad.b="4" detailed="false" bg.color="bg_schema"/>
+
+								<ui:if test=":i ieq 0">
+									<cell cols="23"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
+									<cell cols="23"><void height="55"/></cell>
+								</ui:if>
 
 								<!-- Column 2 -->
 								<ui:if test=":i ine 0">
