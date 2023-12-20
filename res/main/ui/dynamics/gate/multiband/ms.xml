@@ -645,8 +645,8 @@
 									<marker id="gz_${i}s" color="side"/>
 									<marker id="hz_${i}m" color="mid" visibility=":gh_${i}m"/>
 									<marker id="hz_${i}s" color="side" visibility=":gh_${i}s"/>
-									<marker id="gt_${i}m" color="attack_1"/>
-									<marker id="gt_${i}s" color="attack_2"/>
+									<marker id="gt_${i}m" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
+									<marker id="gt_${i}s" editable="true" width="2" pointer="hsize" color="attack_2" hcolor="attack_2"/>
 									<marker id="ht_${i}m" color="attack_1" visibility=":gh_${i}m"/>
 									<marker id="ht_${i}s" color="attack_2" visibility=":gh_${i}s"/>
 

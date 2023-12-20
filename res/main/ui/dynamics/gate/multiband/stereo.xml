@@ -635,7 +635,7 @@
 
 									<marker id="gz_${i}" color="kscale"/>
 									<marker id="hz_${i}" color="kscale" visibility=":gh_${i}"/>
-									<marker id="gt_${i}" color="attack_1"/>
+									<marker id="gt_${i}" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_2"/>
 									<marker id="ht_${i}" color="attack_1" visibility=":gh_${i}"/>
 
 									<!-- Text -->
