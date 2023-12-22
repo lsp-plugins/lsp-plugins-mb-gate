@@ -9,6 +9,19 @@
 		"band6": "Band 6",
 		"band7": "Band 7",
 		"split": "Split",
+		"splits": {
+			"index": {
+				"split_id": "Split #{@id}",
+				"left_id": "Left #{@id}",
+				"mid_id": "Mid #{@id}",
+				"right_id": "Right #{@id}",
+				"side_id": "Side #{@id}"
+			}
+		},
+		"notes": {
+			"full": "{@id}\n{@frequency} Hz\n{@note}{@octave}{@cents}",
+			"unknown": "{@id}\n{@frequency} Hz"
+		},
 		"split_left": "Split Left",
 		"split_middle": "Split Mid",
 		"split_right": "Split Right",

@@ -60,8 +60,8 @@
 						<marker id="fre_0l" color.hue=":hue_0l" hcolor.hue=":hue_0l" lborder="16" lcolor.hue=":hue_0l" hlborder="16" hlcolor.hue=":hue_0l"/>
 						<marker id="fre_0r" color.hue=":hue_0r" hcolor.hue=":hue_0r" lborder="16" lcolor.hue=":hue_0r" hlborder="16" hlcolor.hue=":hue_0r"/>
 						<ui:for id="i" first="1" last="7">
-							<marker id="sf_${i}l" visibility=":cbe_${i}l" editable="true" color.hue=":hue_${i}l" hcolor.hue=":hue_${i}l" rborder="16" rcolor.hue=":hue_${i}l" hrborder="16" hrcolor.hue=":hue_${i}l" pointer="hsize"/>
-							<marker id="sf_${i}r" visibility=":cbe_${i}r" editable="true" color.hue=":hue_${i}r" hcolor.hue=":hue_${i}r" rborder="16" rcolor.hue=":hue_${i}r" hrborder="16" hrcolor.hue=":hue_${i}r" pointer="hsize"/>
+							<marker id="sf_${i}l" ui:id="split_marker_${i}l" visibility=":cbe_${i}l" editable="true" color.hue=":hue_${i}l" hcolor.hue=":hue_${i}l" rborder="16" rcolor.hue=":hue_${i}l" hrborder="16" hrcolor.hue=":hue_${i}l" pointer="hsize"/>
+							<marker id="sf_${i}r" ui:id="split_marker_${i}r" visibility=":cbe_${i}r" editable="true" color.hue=":hue_${i}r" hcolor.hue=":hue_${i}r" rborder="16" rcolor.hue=":hue_${i}r" hrborder="16" hrcolor.hue=":hue_${i}r" pointer="hsize"/>
 							<marker id="fre_${i}l" visibility=":cbe_${i}l" color.hue=":hue_${i}l" hcolor.hue=":hue_${i}l" lborder="16" lcolor.hue=":hue_${i}l" hlborder="16" hlcolor.hue=":hue_${i}l"/>
 							<marker id="fre_${i}r" visibility=":cbe_${i}r" color.hue=":hue_${i}r" hcolor.hue=":hue_${i}r" lborder="16" lcolor.hue=":hue_${i}r" hlborder="16" hlcolor.hue=":hue_${i}r"/>
 						</ui:for>
@@ -75,10 +75,10 @@
 						<mesh id="bfc_${i}l" width="2" fill="true" smooth="true" color="graph_mesh_cycle" color.hue=":hue_${i}l" fcolor="graph_mesh_cycle" fcolor.hue=":hue_${i}l" fcolor.a="0.9" visibility=":flt_l and :cbe_${i}l"/>
 						<mesh id="bfc_${i}r" width="2" fill="true" smooth="true" color="graph_mesh_cycle" color.hue=":hue_${i}r" fcolor="graph_mesh_cycle" fcolor.hue=":hue_${i}r" fcolor.a="0.9" visibility=":flt_r and :cbe_${i}r"/>
 					</ui:for>
-					<mesh id="ifg_l" width="0" color="left_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="left_in" visibility=":ife_l"/>
-					<mesh id="ifg_r" width="0" color="right_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="right_in" visibility=":ife_r"/>
-					<mesh id="ofg_l" width="3" color="left" visibility=":ofe_l"/>
-					<mesh id="ofg_r" width="3" color="right" visibility=":ofe_r"/>
+					<mesh id="ifg_l" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="0" color="left_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="left_in" visibility=":ife_l"/>
+					<mesh id="ifg_r" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="0" color="right_in" color.a="0.8" fcolor.a="0.8" fill="true" fcolor="right_in" visibility=":ife_r"/>
+					<mesh id="ofg_l" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="2" color="left" visibility=":ofe_l"/>
+					<mesh id="ofg_r" oy=":_ui_zoomable_spectrum_graph ? 1 : 3" width="2" color="right" visibility=":ofe_r"/>
 
 					<mesh id="ag_l" width="3" color="left" smooth="true"/>
 					<mesh id="ag_r" width="3" color="right" smooth="true"/>
@@ -91,6 +91,7 @@
 					<axis min="10" max="24000" angle="0.0" log="true" visibility="false"/>
 					<axis min="-72 db / (:zoom ** 3)" max="24 db * :zoom" color="graph_prim" angle="0.5" log="true"/>
 					<axis min="-1" max="1" visibility="false" angle="0.5"/>
+					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 
 					<!-- Text -->
 					<ui:with ox="0" oy="2" y="0" halign="1" valign="1">
@@ -123,6 +124,13 @@
 							<text y="${g} db" text="${g}" visibility=":zoom le -15 db"/>
 						</ui:for>
 					</ui:with>
+
+					<ui:for id="i" first="1" count="7">
+						<ui:with ox="0" oy="2" y="1" valign="-1" color="graph_marker_cycle" visibility="false" pad.h="4" font.bold="true">
+							<text ui:id="split_note_${i}l" x=":sf_${i}l" halign="(:sf_${i}l lt 500) ? 1 : -1" text.halign="(:sf_${i}l lt 500) ? -1 : 1" color.hue=":hue_${i}l"/>
+							<text ui:id="split_note_${i}r" x=":sf_${i}r" halign="(:sf_${i}r lt 500) ? 1 : -1" text.halign="(:sf_${i}s lt 500)r ? -1 : 1" color.hue=":hue_${i}r"/>
+						</ui:with>
+					</ui:for>
 				</graph>
 			</group>
 			<!-- zoom -->
@@ -244,11 +252,11 @@
 		<!-- down part -->
 		<hbox>
 
-			<cgroup id="bsel" embed.h=":bsel ilt 2" embed.b=":bsel ilt 2">
+			<cgroup id="bsel" embed.h=":bsel ilt 2" embed.b=":bsel ilt 2" width.min="880" height.min="424">
 				<ui:for id="c" first="0" last="1">
 					<ui:eval id="channel" value="(:c ieq 0) ? 'num_id_L_eft' : 'num_id_R_ight'"/>
 
-					<grid rows="9" cols="25" transpose="true">
+					<grid rows="11" cols="25" transpose="true">
 						<!-- Labels -->
 						<label text="labels.band" pad.v="4" bg.color="bg_schema" hreduce="true"/>
 						<vbox pad.v="4">
@@ -265,32 +273,37 @@
 						<cell rows="2" pad.v="4">
 							<label text="labels.thresh_zone:db_db" bg.color="bg_schema"/>
 						</cell>
+						<cell rows="2">
+							<void bg.color="bg_schema"/>
+						</cell>
 
 						<!-- Bands -->
 						<ui:for id="i" first="0" last="7">
 							<ui:set id="ch" value="${:i}${(:c ieq 0) ? 'l' : 'r'}"/>
 
-							<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 								<!-- Column 1 -->
 								<ui:if test=":i ieq 0">
 									<!-- Separator -->
 									<cell rows="11"><vsep pad.h="2" bg.color="bg" hreduce="true"/></cell>
 
+									<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 									<cell cols="2" bg.color="bg_schema">
 										<button text="labels.chan.${channel}" text:id="${i}" value="1" editable="false" pointer="arrow" hfill="true" ui:inject="Button_ne_Cycle" height="19" pad.h="6" pad.v="4"/>
 									</cell>
 									<cell cols="2" fill="false">
-										<vbox height.min="40">
+										<vbox height="36" vreduce="true">
 											<label text="0"/>
 											<value id="fre_${ch}" width.min="30" sline="true" detailed="false"/>
 										</vbox>
 									</cell>
+								</ui:with>
 								</ui:if>
 
 								<ui:if test=":i ine 0">
 									<!-- Separator -->
-									<cell rows="11"><vsep pad.h="2" bg.color="bg" hreduce="true"/></cell>
+									<cell rows="9"><vsep pad.h="2" bg.color="bg" hreduce="true"/></cell>
 
+									<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 									<cell cols="2" bg.color="bg_schema">
 										<button
 											id="cbe_${ch}"
@@ -309,9 +322,12 @@
 											pad.v="4"/>
 									</cell>
 									<knob id="sf_${ch}" size="16" ssize="3" pad.v="4" scolor="((${i} ieq 0) or :cbe_${ch}) ? 'cycle' : 'cycle_inactive'" scolor.hue=":hue_${ch}"/>
+								</ui:with>
 								</ui:if>
+
+								<ui:with bright="((${i} ieq 0) or :cbe_${ch}) ? 1 : 0.75" bg.bright="((${i} ieq 0) or :cbe_${ch}) ? 1.0 : :const_bg_darken">
 								<cell cols="2" pad.h="6" bg.color="bg_schema">
-									<grid rows="2" cols="1" hspacing="4">
+									<grid rows="2" cols="1" hspacing="4" vreduce="true">
 										<button
 											id="ge_${ch}"
 											text="labels.chan.on"
@@ -342,9 +358,14 @@
 								<knob id="gt_${ch}" size="16" ssize="3" pad.t="4" scolor="((${i} ieq 0) or :cbe_${ch}) ? 'threshold' : 'threshold_inactive'" bg.color="bg_schema"/>
 								<value id="gt_${ch}" pad.b="4" detailed="false" bg.color="bg_schema"/>
 
+								<ui:if test=":i ieq 0">
+									<cell cols="23"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
+									<cell cols="23"><void height="55"/></cell>
+								</ui:if>
+
 								<!-- Column 2 -->
 								<ui:if test=":i ine 0">
-									<vbox>
+									<vbox height="36" vreduce="true">
 										<value id="sf_${ch}" width.min="30" detailed="false" visibility=":cbe_${ch}"/>
 										<value id="fre_${ch}" detailed="false"/>
 										<label text="labels.chan.off" visibility="not :cbe_${ch}"/>
@@ -560,9 +581,8 @@
 									<label text="labels.chan.${chan_col}" pad.v="4" vreduce="true"/>
 									<ui:if test=":i ieq 0">
 										<button text="labels.chan.active_${channel}" text:id="${i}" value="1" editable="false" pointer="arrow" hfill="true" ui:inject="Button_ne_${chan_col}" height="19" pad.h="6" pad.v="4"/>
-										<hbox>
-											<label/>
-											<vbox height.min="40" fill="false">
+										<hbox height="36" vreduce="true">
+											<vbox >
 												<label text="0" width.min="32"/>
 												<value id="fre_${ch}" width.min="32" sline="true" detailed="false"/>
 											</vbox>
@@ -625,8 +645,8 @@
 									<marker id="gz_${i}r" color="right"/>
 									<marker id="hz_${i}l" color="left" visibility=":gh_${i}l"/>
 									<marker id="hz_${i}r" color="right" visibility=":gh_${i}r"/>
-									<marker id="gt_${i}l" color="attack_1"/>
-									<marker id="gt_${i}r" color="attack_2"/>
+									<marker id="gt_${i}l" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
+									<marker id="gt_${i}r" editable="true" width="2" pointer="hsize" color="attack_2" hcolor="attack_2"/>
 									<marker id="ht_${i}l" color="attack_1" visibility=":gh_${i}l"/>
 									<marker id="ht_${i}r" color="attack_2" visibility=":gh_${i}r"/>
 

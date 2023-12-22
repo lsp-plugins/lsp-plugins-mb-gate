@@ -26,7 +26,7 @@
 
 #define LSP_PLUGINS_MB_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_MB_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_MB_GATE_VERSION_MICRO       15
+#define LSP_PLUGINS_MB_GATE_VERSION_MICRO       16
 
 #define LSP_PLUGINS_MB_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -682,6 +682,7 @@ namespace lsp
         {
             "Multi-band Gate Mono x8",
             "Multiband Gate Mono x8",
+            "MB Gate Mono",
             "MBG8M",
             &developers::v_sadovnikov,
             "mb_gate_mono",
@@ -706,6 +707,7 @@ namespace lsp
         {
             "Multi-band Gate Stereo x8",
             "Multiband Gate Stereo x8",
+            "MB Gate Stereo",
             "MBG8S",
             &developers::v_sadovnikov,
             "mb_gate_stereo",
@@ -730,6 +732,7 @@ namespace lsp
         {
             "Multi-band Gate LeftRight x8",
             "Multiband Gate LeftRight x8",
+            "MB Gate L/R",
             "MBG8LR",
             &developers::v_sadovnikov,
             "mb_gate_lr",
@@ -754,6 +757,7 @@ namespace lsp
         {
             "Multi-band Gate MidSide x8",
             "Multiband Gate MidSide x8",
+            "MB Gate M/S",
             "MBG8MS",
             &developers::v_sadovnikov,
             "mb_gate_ms",
@@ -779,6 +783,7 @@ namespace lsp
         {
             "Sidechain Multi-band Gate Mono x8",
             "Sidechain Multiband Gate Mono x8",
+            "SC MB Gate Mono",
             "SCMBG8M",
             &developers::v_sadovnikov,
             "sc_mb_gate_mono",
@@ -803,6 +808,7 @@ namespace lsp
         {
             "Sidechain Multi-band Gate Stereo x8",
             "Sidechain Multiband Gate Stereo x8",
+            "SC MB Gate Stereo",
             "SCMBG8S",
             &developers::v_sadovnikov,
             "sc_mb_gate_stereo",
@@ -827,6 +833,7 @@ namespace lsp
         {
             "Sidechain Multi-band Gate LeftRight x8",
             "Sidechain Multiband Gate LeftRight x8",
+            "SC MB Gate L/R",
             "SCMBG8LR",
             &developers::v_sadovnikov,
             "sc_mb_gate_lr",
@@ -851,6 +858,7 @@ namespace lsp
         {
             "Sidechain Multi-band Gate MidSide x8",
             "Sidechain Multiband Gate MidSide x8",
+            "SC MB Gate M/S",
             "SCMBG8MS",
             &developers::v_sadovnikov,
             "sc_mb_gate_ms",
