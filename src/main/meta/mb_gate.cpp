@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 3 авг. 2021 г.
@@ -689,6 +689,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_mono"),
             LSP_LV2UI_URI("mb_gate_mono"),
             "bmhh",
+            LSP_VST3_UID("mbg8m   bmhh"),
+            LSP_VST3UI_UID("mbg8m   bmhh"),
             LSP_LADSPA_MB_GATE_BASE + 0,
             LSP_LADSPA_URI("mb_gate_mono"),
             LSP_CLAP_URI("mb_gate_mono"),
@@ -714,6 +716,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_stereo"),
             LSP_LV2UI_URI("mb_gate_stereo"),
             "ysu1",
+            LSP_VST3_UID("mbg8s   ysu1"),
+            LSP_VST3UI_UID("mbg8s   ysu1"),
             LSP_LADSPA_MB_GATE_BASE + 1,
             LSP_LADSPA_URI("mb_gate_stereo"),
             LSP_CLAP_URI("mb_gate_stereo"),
@@ -739,6 +743,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_lr"),
             LSP_LV2UI_URI("mb_gate_lr"),
             "etaj",
+            LSP_VST3_UID("mbg8lr  etaj"),
+            LSP_VST3UI_UID("mbg8lr  etaj"),
             LSP_LADSPA_MB_GATE_BASE + 2,
             LSP_LADSPA_URI("mb_gate_lr"),
             LSP_CLAP_URI("mb_gate_lr"),
@@ -764,6 +770,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_ms"),
             LSP_LV2UI_URI("mb_gate_ms"),
             "x9nr",
+            LSP_VST3_UID("mbg8ms  x9nr"),
+            LSP_VST3UI_UID("mbg8ms  x9nr"),
             LSP_LADSPA_MB_GATE_BASE + 3,
             LSP_LADSPA_URI("mb_gate_ms"),
             LSP_CLAP_URI("mb_gate_ms"),
@@ -790,6 +798,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_mono"),
             LSP_LV2UI_URI("sc_mb_gate_mono"),
             "mhz8",
+            LSP_VST3_UID("scmbg8m mhz8"),
+            LSP_VST3UI_UID("scmbg8m mhz8"),
             LSP_LADSPA_MB_GATE_BASE + 4,
             LSP_LADSPA_URI("sc_mb_gate_mono"),
             LSP_CLAP_URI("sc_mb_gate_mono"),
@@ -815,6 +825,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_stereo"),
             LSP_LV2UI_URI("sc_mb_gate_stereo"),
             "rvja",
+            LSP_VST3_UID("scmbg8s rvja"),
+            LSP_VST3UI_UID("scmbg8s rvja"),
             LSP_LADSPA_MB_GATE_BASE + 5,
             LSP_LADSPA_URI("sc_mb_gate_stereo"),
             LSP_CLAP_URI("sc_mb_gate_stereo"),
@@ -840,6 +852,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_lr"),
             LSP_LV2UI_URI("sc_mb_gate_lr"),
             "fhfk",
+            LSP_VST3_UID("scmbg8lrfhfk"),
+            LSP_VST3UI_UID("scmbg8lrfhfk"),
             LSP_LADSPA_MB_GATE_BASE + 6,
             LSP_LADSPA_URI("sc_mb_gate_lr"),
             LSP_CLAP_URI("sc_mb_gate_lr"),
@@ -865,6 +879,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_ms"),
             LSP_LV2UI_URI("sc_mb_gate_ms"),
             "ukzs",
+            LSP_VST3_UID("scmbg8msukzs"),
+            LSP_VST3UI_UID("scmbg8msukzs"),
             LSP_LADSPA_MB_GATE_BASE + 7,
             LSP_LADSPA_URI("sc_mb_gate_ms"),
             LSP_CLAP_URI("sc_mb_gate_ms"),
