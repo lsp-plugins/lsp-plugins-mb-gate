@@ -145,6 +145,7 @@ namespace lsp
             AMP_GAIN("g_out", "Output gain", mb_gate_metadata::OUT_GAIN_DFL, 10.0f), \
             AMP_GAIN("g_dry", "Dry gain", 0.0f, 10.0f), \
             AMP_GAIN("g_wet", "Wet gain", 1.0f, 10.0f), \
+            PERCENTS("drywet", "Dry/Wet balance", 100.0f, 0.1f), \
             LOG_CONTROL("react", "FFT reactivity", U_MSEC, mb_gate_metadata::FFT_REACT_TIME), \
             AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
             LOG_CONTROL("zoom", "Graph zoom", U_GAIN_AMP, mb_gate_metadata::ZOOM), \
@@ -168,7 +169,7 @@ namespace lsp
             SWITCH("schc" id, "Sidechain custom hi-cut" label, 0), \
             LOG_CONTROL_DFL("sclf" id, "Sidechain lo-cut frequency" label, U_HZ, mb_gate_metadata::FREQ, fe), \
             LOG_CONTROL_DFL("schf" id, "Sidechain hi-cut frequency" label, U_HZ, mb_gate_metadata::FREQ, fs), \
-            MESH("bfc" id, "Side-chain band frequency chart" label, 2, mb_gate_metadata::FILTER_MESH_POINTS), \
+            MESH("bfc" id, "Side-chain band frequency chart" label, 2, mb_gate_metadata::MESH_POINTS + 4), \
             \
             SWITCH("ge" id, "Gate enable" label, 1.0f), \
             SWITCH("bs" id, "Solo band" label, 0.0f), \
@@ -181,6 +182,7 @@ namespace lsp
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, U_GAIN_AMP, mb_gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack time" label, U_MSEC, mb_gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release time" label, U_MSEC, mb_gate_metadata::RELEASE_TIME), \
+            CONTROL("th" id, "Hold time" label, U_MSEC, mb_gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, U_GAIN_AMP, mb_gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, mb_gate_metadata::MAKEUP), \
             HUE_CTL("hue" id, "Hue " label, (float(x) / float(total))), \

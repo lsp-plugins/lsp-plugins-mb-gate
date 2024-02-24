@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 3 авг. 2021 г.
@@ -79,6 +79,11 @@ namespace lsp
             static constexpr float  RELEASE_TIME_DFL            = 100.0f;
             static constexpr float  RELEASE_TIME_STEP           = 0.0025f;
 
+            static constexpr float  HOLD_TIME_MIN               = 0.0f;
+            static constexpr float  HOLD_TIME_MAX               = 1000.0f;
+            static constexpr float  HOLD_TIME_DFL               = 0.0f;
+            static constexpr float  HOLD_TIME_STEP              = 0.1f;
+
             static constexpr float  MAKEUP_MIN                  = GAIN_AMP_M_60_DB;
             static constexpr float  MAKEUP_MAX                  = GAIN_AMP_P_60_DB;
             static constexpr float  MAKEUP_DFL                  = GAIN_AMP_0_DB;
@@ -116,7 +121,6 @@ namespace lsp
             static constexpr size_t FFT_RANK                    = 13;
             static constexpr size_t FFT_ITEMS                   = 1 << FFT_RANK;
             static constexpr size_t FFT_MESH_POINTS             = MESH_POINTS;
-            static constexpr size_t FILTER_MESH_POINTS          = MESH_POINTS + 2;
             static constexpr size_t FFT_WINDOW                  = dspu::windows::HANN;
             static constexpr size_t FFT_REFRESH_RATE            = 20;
             static constexpr float  FFT_REACT_TIME_MIN          = 0.000;
