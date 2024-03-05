@@ -130,7 +130,7 @@
 			<!-- zoom -->
 			<cell rows="2">
 				<vbox vexpand="true" bg.color="bg_schema">
-					<label font.name="lsp-icons" font.size="12" font.antialias="true" text="E" color="text_icon" pad.b="4" pad.t="4"/>
+					<label font.name="lsp-icons" font.size="12" font.antialias="true" text="icons.main.zoom" color="text_icon" pad.b="4" pad.t="4"/>
 					<fader id="zoom" angle="1" vexpand="true" bg.inherit="true" flat="true"/>
 					<value id="zoom" width="40"/>
 				</vbox>
@@ -161,7 +161,7 @@
 			<cell rows="2">
 				<vbox spacing="4">
 					<group text="groups.signal" expand="true">
-						<grid rows="4" cols="2" hspacing="4">
+						<grid rows="5" cols="2" hspacing="4">
 							<knob id="g_in" pad.r="4"/>
 							<vbox vfill="false">
 								<label text="labels.input" halign="0"/>
@@ -184,6 +184,12 @@
 							<vbox vfill="false">
 								<label text="labels.signal.wet" halign="0"/>
 								<value id="g_wet" width.min="50" sline="true" halign="0"/>
+							</vbox>
+							
+							<knob id="drywet" scolor="drywet" pad.r="4"/>
+							<vbox vfill="false">
+								<label text="labels.signal.drywet" halign="0"/>
+								<value id="drywet" width.min="50" sline="true" halign="0"/>
 							</vbox>
 						</grid>
 					</group>
@@ -514,7 +520,7 @@
 							</align>
 							<hsep vreduce="true"/>
 
-							<grid rows="7" cols="9" hspacing="0" expand="true">
+							<grid rows="7" cols="10" hspacing="0" expand="true">
 								<!-- r1,2 -->
 								<ui:with vreduce="true">
 									<cell rows="2"><label text="labels.controls"/></cell>
@@ -524,6 +530,7 @@
 									<cell rows="2"><label text="labels.release"/></cell>
 									<cell cols="2"><label text="labels.curve" pad.t="4"/></cell>
 									<cell cols="2"><label text="labels.hysteresis"/></cell>
+									<cell rows="2"><label text="labels.hold"/></cell>
 
 									<label text="labels.thresh_old"/>
 									<label text="labels.zone"/>
@@ -532,7 +539,7 @@
 								</ui:with>
 
 								<!-- r3 -->
-								<cell cols="9"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
+								<cell cols="10"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
 								<!-- r4 -->
 								<cell rows="2">
 									<vbox vfill="false" spacing="4" pad.h="6" pad.v="4">
@@ -576,6 +583,7 @@
 								<knob id="gz_${i}" size="16" ssize="3" scolor="cycle" pad.t="4" scolor.hue=":hue_${i}"/>
 								<knob id="ht_${i}" size="16" ssize="3" pad.t="4" scolor="(:gh_${i} igt 0) ? 'attack_1' : 'attack_inactive'" bright="(:gh_${i} igt 0) ? 1 : 0.75" bg.bright="(:gh_${i} igt 0) ? 1 : :const_bg_darken"/>
 								<knob id="hz_${i}" size="16" ssize="3" scolor="(:gh_${i} igt 0) ? 'cycle' : 'cycle_inactive'" pad.t="4" scolor.hue=":hue_${i}" bright="(:gh_${i} igt 0) ? 1 : 0.75" bg.bright="(:gh_${i} igt 0) ? 1 : :const_bg_darken"/>
+								<knob id="th_${i}" size="16" ssize="3" scolor="cycle" pad.t="4" scolor.hue=":hue_${i}"/>
 								<!-- r5 -->
 								<ui:with sline="true" pad.h="6" pad.v="4" width.min="48">
 									<value id="gr_${i}"/>
@@ -586,15 +594,14 @@
 									<value id="gz_${i}"/>
 									<value id="ht_${i}" bright="(:gh_${i} igt 0) ? 1 : 0.75" bg.bright="(:gh_${i} igt 0) ? 1 : :const_bg_darken"/>
 									<value id="hz_${i}" bright="(:gh_${i} igt 0) ? 1 : 0.75" bg.bright="(:gh_${i} igt 0) ? 1 : :const_bg_darken"/>
+									<value id="th_${i}"/>
 								</ui:with>
-								<cell cols="9"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
-								<cell cols="9"><void fill="true" expand="true"/></cell>
-
+								<cell cols="10"><hsep bg.color="bg" pad.v="2" vreduce="true"/></cell>
+								<cell cols="10"><void fill="true" expand="true"/></cell>
 							</grid>
 						</vbox>
 
 						<vbox>
-
 							<void bg.color="bg" height="4" vreduce="true"/>
 
 							<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text.show="false">
@@ -633,10 +640,10 @@
 
 									<!-- Markers -->
 
-									<marker id="gz_${i}" color="kscale"/>
-									<marker id="hz_${i}" color="kscale" visibility=":gh_${i}"/>
+									<marker v=":gt_${i} * :gz_${i}" color="kscale"/>
+									<marker v=":gt_${i} * :ht_${i} * :hz_${i}" color="kscale" visibility=":gh_${i}"/>
 									<marker id="gt_${i}" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_2"/>
-									<marker id="ht_${i}" color="attack_1" visibility=":gh_${i}"/>
+									<marker v=":gt_${i} * :ht_${i}" color="attack_1" visibility=":gh_${i}"/>
 
 									<!-- Text -->
 									<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>

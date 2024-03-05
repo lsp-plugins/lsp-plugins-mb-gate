@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 3 авг. 2021 г.
@@ -26,7 +26,7 @@
 
 #define LSP_PLUGINS_MB_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_MB_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_MB_GATE_VERSION_MICRO       16
+#define LSP_PLUGINS_MB_GATE_VERSION_MICRO       17
 
 #define LSP_PLUGINS_MB_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -145,6 +145,7 @@ namespace lsp
             AMP_GAIN("g_out", "Output gain", mb_gate_metadata::OUT_GAIN_DFL, 10.0f), \
             AMP_GAIN("g_dry", "Dry gain", 0.0f, 10.0f), \
             AMP_GAIN("g_wet", "Wet gain", 1.0f, 10.0f), \
+            PERCENTS("drywet", "Dry/Wet balance", 100.0f, 0.1f), \
             LOG_CONTROL("react", "FFT reactivity", U_MSEC, mb_gate_metadata::FFT_REACT_TIME), \
             AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
             LOG_CONTROL("zoom", "Graph zoom", U_GAIN_AMP, mb_gate_metadata::ZOOM), \
@@ -168,7 +169,7 @@ namespace lsp
             SWITCH("schc" id, "Sidechain custom hi-cut" label, 0), \
             LOG_CONTROL_DFL("sclf" id, "Sidechain lo-cut frequency" label, U_HZ, mb_gate_metadata::FREQ, fe), \
             LOG_CONTROL_DFL("schf" id, "Sidechain hi-cut frequency" label, U_HZ, mb_gate_metadata::FREQ, fs), \
-            MESH("bfc" id, "Side-chain band frequency chart" label, 2, mb_gate_metadata::FILTER_MESH_POINTS), \
+            MESH("bfc" id, "Side-chain band frequency chart" label, 2, mb_gate_metadata::MESH_POINTS + 4), \
             \
             SWITCH("ge" id, "Gate enable" label, 1.0f), \
             SWITCH("bs" id, "Solo band" label, 0.0f), \
@@ -181,6 +182,7 @@ namespace lsp
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, U_GAIN_AMP, mb_gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack time" label, U_MSEC, mb_gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release time" label, U_MSEC, mb_gate_metadata::RELEASE_TIME), \
+            CONTROL("th" id, "Hold time" label, U_MSEC, mb_gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, U_GAIN_AMP, mb_gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, mb_gate_metadata::MAKEUP), \
             HUE_CTL("hue" id, "Hue " label, (float(x) / float(total))), \
@@ -689,6 +691,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_mono"),
             LSP_LV2UI_URI("mb_gate_mono"),
             "bmhh",
+            LSP_VST3_UID("mbg8m   bmhh"),
+            LSP_VST3UI_UID("mbg8m   bmhh"),
             LSP_LADSPA_MB_GATE_BASE + 0,
             LSP_LADSPA_URI("mb_gate_mono"),
             LSP_CLAP_URI("mb_gate_mono"),
@@ -714,6 +718,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_stereo"),
             LSP_LV2UI_URI("mb_gate_stereo"),
             "ysu1",
+            LSP_VST3_UID("mbg8s   ysu1"),
+            LSP_VST3UI_UID("mbg8s   ysu1"),
             LSP_LADSPA_MB_GATE_BASE + 1,
             LSP_LADSPA_URI("mb_gate_stereo"),
             LSP_CLAP_URI("mb_gate_stereo"),
@@ -739,6 +745,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_lr"),
             LSP_LV2UI_URI("mb_gate_lr"),
             "etaj",
+            LSP_VST3_UID("mbg8lr  etaj"),
+            LSP_VST3UI_UID("mbg8lr  etaj"),
             LSP_LADSPA_MB_GATE_BASE + 2,
             LSP_LADSPA_URI("mb_gate_lr"),
             LSP_CLAP_URI("mb_gate_lr"),
@@ -764,6 +772,8 @@ namespace lsp
             LSP_LV2_URI("mb_gate_ms"),
             LSP_LV2UI_URI("mb_gate_ms"),
             "x9nr",
+            LSP_VST3_UID("mbg8ms  x9nr"),
+            LSP_VST3UI_UID("mbg8ms  x9nr"),
             LSP_LADSPA_MB_GATE_BASE + 3,
             LSP_LADSPA_URI("mb_gate_ms"),
             LSP_CLAP_URI("mb_gate_ms"),
@@ -790,6 +800,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_mono"),
             LSP_LV2UI_URI("sc_mb_gate_mono"),
             "mhz8",
+            LSP_VST3_UID("scmbg8m mhz8"),
+            LSP_VST3UI_UID("scmbg8m mhz8"),
             LSP_LADSPA_MB_GATE_BASE + 4,
             LSP_LADSPA_URI("sc_mb_gate_mono"),
             LSP_CLAP_URI("sc_mb_gate_mono"),
@@ -815,6 +827,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_stereo"),
             LSP_LV2UI_URI("sc_mb_gate_stereo"),
             "rvja",
+            LSP_VST3_UID("scmbg8s rvja"),
+            LSP_VST3UI_UID("scmbg8s rvja"),
             LSP_LADSPA_MB_GATE_BASE + 5,
             LSP_LADSPA_URI("sc_mb_gate_stereo"),
             LSP_CLAP_URI("sc_mb_gate_stereo"),
@@ -840,6 +854,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_lr"),
             LSP_LV2UI_URI("sc_mb_gate_lr"),
             "fhfk",
+            LSP_VST3_UID("scmbg8lrfhfk"),
+            LSP_VST3UI_UID("scmbg8lrfhfk"),
             LSP_LADSPA_MB_GATE_BASE + 6,
             LSP_LADSPA_URI("sc_mb_gate_lr"),
             LSP_CLAP_URI("sc_mb_gate_lr"),
@@ -865,6 +881,8 @@ namespace lsp
             LSP_LV2_URI("sc_mb_gate_ms"),
             LSP_LV2UI_URI("sc_mb_gate_ms"),
             "ukzs",
+            LSP_VST3_UID("scmbg8msukzs"),
+            LSP_VST3UI_UID("scmbg8msukzs"),
             LSP_LADSPA_MB_GATE_BASE + 7,
             LSP_LADSPA_URI("sc_mb_gate_ms"),
             LSP_CLAP_URI("sc_mb_gate_ms"),

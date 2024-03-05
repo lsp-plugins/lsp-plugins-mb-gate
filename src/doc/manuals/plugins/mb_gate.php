@@ -93,6 +93,7 @@
 	<li><b>Output</b> - the amount of gain applied to the output signal before processing.</li>
 	<li><b>Dry</b> - the amount of dry (unprocessed) signal passed to the output.</li>
 	<li><b>Wet</b> - the amount of wet (processed) signal passed to the output.</li>
+	<li><b>Dry/Wet</b> - the knob that controls the balance between the mixed dry and wet signal (see <b>Dry</b> and <b>Wet</b>) and the dry (unprocessed) signal.</li>
 	<li><b>In</b> - the input signal meter.</li>
 	<li><b>Out</b> - the output signal meter.</li>
 </ul>
@@ -177,6 +178,7 @@
 	<li><b>Gate Makeup</b> - additional amplification gain after processing stage.</li>
 	<li><b>Gate Attack</b> - attack time of the gate.</li>
 	<li><b>Gate Release</b> - release time of the gate.</li>
+	<li><b>Gate Hold</b> - the time period the envelope holds it's maximum value before starting the release.</li>
 	<li><b>Gate Curve Thresh</b> - the main threshold of gate, signals below threshold become gain-reduced.</li>
 	<li><b>Gate Curve Zone</b> - the size of main transition zone for soft gain reduction</li>
 	<li><b>Gate Hysteresis</b> - enables additional hysteresis curve</li>

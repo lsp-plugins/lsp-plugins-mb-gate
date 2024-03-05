@@ -2,6 +2,13 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.17 ===
+* Implemented Hold option.
+* Implemented Dry/Wet balance knob.
+* Fixed curve lines on dynamics graph.
+* Updated behaviour of split editing in UI.
+* Updated build scripts and dependencies.
+
 === 1.0.16 ===
 * Implemented automatic scale of spectrum graph switch.
 * Aligned the height of the blocks in "cgroup".
