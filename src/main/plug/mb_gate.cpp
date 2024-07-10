@@ -1119,7 +1119,7 @@ namespace lsp
                 c->sDelay.set_delay(latency);
                 c->sDryDelay.set_delay(latency + xover_latency);
                 sAnalyzer.set_channel_delay(c->nAnInChannel, xover_latency);
-                c->sXOverDelay.set_delay(latency + xover_latency);
+                c->sXOverDelay.set_delay(xover_latency);
             }
 
             nEnvBoost       = env_boost;
