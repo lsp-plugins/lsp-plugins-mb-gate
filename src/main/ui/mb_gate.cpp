@@ -278,7 +278,7 @@ namespace lsp
                 else
                     lc_string.set("lists.mb_gate.splits.index.split_id");
 
-                lc_string.params()->set_int("id", (vSplits.index_of(s) % (meta::mb_gate_metadata::BANDS_MAX-1))+1);
+                lc_string.params()->set_int("id", (vSplits.index_of(s) % (meta::mb_gate_metadata::BANDS_MAX-1))+2);
                 lc_string.format(&text);
                 params.set_string("id", &text);
                 lc_string.params()->clear();
