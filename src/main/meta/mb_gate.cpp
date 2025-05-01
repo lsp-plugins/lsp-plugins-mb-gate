@@ -167,9 +167,9 @@ namespace lsp
             AMP_GAIN("g_dry", "Dry gain", 0.0f, 10.0f), \
             AMP_GAIN("g_wet", "Wet gain", 1.0f, 10.0f), \
             PERCENTS("drywet", "Dry/Wet balance", 100.0f, 0.1f), \
-            LOG_CONTROL("react", "FFT reactivity", U_MSEC, mb_gate_metadata::FFT_REACT_TIME), \
+            LOG_CONTROL("react", "FFT reactivity", "Reactivity", U_MSEC, mb_gate_metadata::FFT_REACT_TIME), \
             AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
-            LOG_CONTROL("zoom", "Graph zoom", U_GAIN_AMP, mb_gate_metadata::ZOOM), \
+            LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, mb_gate_metadata::ZOOM), \
             COMBO("envb", "Envelope boost", mb_gate_metadata::FB_DEFAULT, mb_gate_sc_boost), \
             COMBO("bsel", "Band selection", mb_gate_metadata::SC_BAND_DFL, bands)
 
@@ -184,7 +184,7 @@ namespace lsp
         #define MB_BAND_COMMON(id, label, alias, x, total, fe, fs) \
             COMBO("scm" id, "Sidechain mode" label, mb_gate_metadata::SC_MODE_DFL, mb_gate_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, mb_gate_metadata::LOOKAHEAD), \
-            LOG_CONTROL("scr" id, "Sidechain reactivity" label, U_MSEC, mb_gate_metadata::REACTIVITY), \
+            LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, mb_gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
             SWITCH("sclc" id, "Sidechain custom lo-cut" label, 0), \
             SWITCH("schc" id, "Sidechain custom hi-cut" label, 0), \
@@ -197,15 +197,15 @@ namespace lsp
             SWITCH("bm" id, "Mute band" label, 0.0f), \
             \
             SWITCH("gh" id, "Hysteresis" label, 0.0f), \
-            LOG_CONTROL("gt" id, "Curve threshold" label, U_GAIN_AMP, mb_gate_metadata::THRESHOLD), \
-            LOG_CONTROL("gz" id, "Curve zone size" label, U_GAIN_AMP, mb_gate_metadata::ZONE), \
-            LOG_CONTROL("ht" id, "Hysteresis threshold" label, U_GAIN_AMP, mb_gate_metadata::H_THRESHOLD), \
-            LOG_CONTROL("hz" id, "Hysteresis zone size" label, U_GAIN_AMP, mb_gate_metadata::ZONE), \
-            LOG_CONTROL("at" id, "Attack time" label, U_MSEC, mb_gate_metadata::ATTACK_TIME), \
-            LOG_CONTROL("rt" id, "Release time" label, U_MSEC, mb_gate_metadata::RELEASE_TIME), \
+            LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, mb_gate_metadata::THRESHOLD), \
+            LOG_CONTROL("gz" id, "Curve zone size" label, "Size" alias, U_GAIN_AMP, mb_gate_metadata::ZONE), \
+            LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, mb_gate_metadata::H_THRESHOLD), \
+            LOG_CONTROL("hz" id, "Hysteresis zone size" label, "Hyst size" alias, U_GAIN_AMP, mb_gate_metadata::ZONE), \
+            LOG_CONTROL("at" id, "Attack time" label, "Att time" alias, U_MSEC, mb_gate_metadata::ATTACK_TIME), \
+            LOG_CONTROL("rt" id, "Release time" label, "Rel time" alias, U_MSEC, mb_gate_metadata::RELEASE_TIME), \
             CONTROL("th" id, "Hold time" label, U_MSEC, mb_gate_metadata::HOLD_TIME), \
-            LOG_CONTROL("gr" id, "Reduction" label, U_GAIN_AMP, mb_gate_metadata::REDUCTION), \
-            LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, mb_gate_metadata::MAKEUP), \
+            LOG_CONTROL("gr" id, "Reduction" label, "Reduction " alias, U_GAIN_AMP, mb_gate_metadata::REDUCTION), \
+            LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup " alias, U_GAIN_AMP, mb_gate_metadata::MAKEUP), \
             HUE_CTL("hue" id, "Hue " label, (float(x) / float(total))), \
             METER("fre" id, "Frequency range end" label, U_HZ,  mb_gate_metadata::OUT_FREQ), \
             MESH("cg" id, "Gate curve graph" label, 2, mb_gate_metadata::CURVE_MESH_SIZE), \
