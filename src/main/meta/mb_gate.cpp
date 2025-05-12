@@ -183,7 +183,7 @@ namespace lsp
 
         #define MB_BAND_COMMON(id, label, alias, x, total, fe, fs) \
             COMBO("scm" id, "Sidechain mode" label, "SC mode" alias, mb_gate_metadata::SC_MODE_DFL, mb_gate_sc_modes), \
-            CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, mb_gate_metadata::LOOKAHEAD), \
+            CONTROL("sla" id, "Sidechain lookahead" label, "SC look" alias, U_MSEC, mb_gate_metadata::LOOKAHEAD), \
             LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, mb_gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
             SWITCH("sclc" id, "Sidechain custom lo-cut" label, "SC LCF on" alias, 0), \
@@ -203,7 +203,7 @@ namespace lsp
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, "Hyst size" alias, U_GAIN_AMP, mb_gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack time" label, "Att time" alias, U_MSEC, mb_gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release time" label, "Rel time" alias, U_MSEC, mb_gate_metadata::RELEASE_TIME), \
-            CONTROL("th" id, "Hold time" label, U_MSEC, mb_gate_metadata::HOLD_TIME), \
+            CONTROL("th" id, "Hold time" label, "Hold time" alias, U_MSEC, mb_gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, "Reduction " alias, U_GAIN_AMP, mb_gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup " alias, U_GAIN_AMP, mb_gate_metadata::MAKEUP), \
             HUE_CTL("hue" id, "Hue " label, (float(x) / float(total))), \
