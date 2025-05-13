@@ -162,13 +162,13 @@ namespace lsp
         #define MB_COMMON(bands) \
             BYPASS, \
             COMBO("mode", "Gate mode", "Mode", 1, mb_global_gate_modes), \
-            AMP_GAIN("g_in", "Input gain", mb_gate_metadata::IN_GAIN_DFL, 10.0f), \
-            AMP_GAIN("g_out", "Output gain", mb_gate_metadata::OUT_GAIN_DFL, 10.0f), \
-            AMP_GAIN("g_dry", "Dry gain", 0.0f, 10.0f), \
-            AMP_GAIN("g_wet", "Wet gain", 1.0f, 10.0f), \
-            PERCENTS("drywet", "Dry/Wet balance", 100.0f, 0.1f), \
+            AMP_GAIN("g_in", "Input gain", "Input gain", mb_gate_metadata::IN_GAIN_DFL, 10.0f), \
+            AMP_GAIN("g_out", "Output gain", "Output gain", mb_gate_metadata::OUT_GAIN_DFL, 10.0f), \
+            AMP_GAIN("g_dry", "Dry gain", "Dry", 0.0f, 10.0f), \
+            AMP_GAIN("g_wet", "Wet gain", "Wet", 1.0f, 10.0f), \
+            PERCENTS("drywet", "Dry/Wet balance", "Dry/Wet", 100.0f, 0.1f), \
             LOG_CONTROL("react", "FFT reactivity", "Reactivity", U_MSEC, mb_gate_metadata::FFT_REACT_TIME), \
-            AMP_GAIN("shift", "Shift gain", 1.0f, 100.0f), \
+            AMP_GAIN("shift", "Shift gain", "Shift", 1.0f, 100.0f), \
             LOG_CONTROL("zoom", "Graph zoom", "Zoom", U_GAIN_AMP, mb_gate_metadata::ZOOM), \
             COMBO("envb", "Envelope boost", "Env boost", mb_gate_metadata::FB_DEFAULT, mb_gate_sc_boost), \
             COMBO("bsel", "Band selection", "Band selector", mb_gate_metadata::SC_BAND_DFL, bands)
@@ -185,7 +185,7 @@ namespace lsp
             COMBO("scm" id, "Sidechain mode" label, "SC mode" alias, mb_gate_metadata::SC_MODE_DFL, mb_gate_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, "SC look" alias, U_MSEC, mb_gate_metadata::LOOKAHEAD), \
             LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, mb_gate_metadata::REACTIVITY), \
-            AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
+            AMP_GAIN100("scp" id, "Sidechain preamp" label, "SC preamp" alias, GAIN_AMP_0_DB), \
             SWITCH("sclc" id, "Sidechain custom lo-cut" label, "SC LCF on" alias, 0), \
             SWITCH("schc" id, "Sidechain custom hi-cut" label, "SC HCF on" alias, 0), \
             LOG_CONTROL_DFL("sclf" id, "Sidechain lo-cut frequency" label, "SC LCF" alias, U_HZ, mb_gate_metadata::FREQ, fe), \
