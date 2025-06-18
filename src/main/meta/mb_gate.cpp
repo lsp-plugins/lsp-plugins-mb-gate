@@ -274,6 +274,9 @@ namespace lsp
             METER_GAIN("ilm" id, "Input level meter" label, GAIN_AMP_P_24_DB), \
             METER_GAIN("olm" id, "Output level meter" label, GAIN_AMP_P_24_DB)
 
+        #define MB_LINK(id, label, alias) \
+            SWITCH(id, label, alias, 0.0f)
+
         static const port_t mb_gate_mono_ports[] =
         {
             PORTS_MONO_PLUGIN,
@@ -369,6 +372,7 @@ namespace lsp
             MB_GATE_SHM_LINK_STEREO,
             MB_GATE_PREMIX,
             MB_COMMON(gate_sc_lr_bands),
+            MB_LINK("clink", "Left/Right controls link", "L/R link"),
             MB_CHANNEL("_l", " Left", " L"),
             MB_CHANNEL("_r", " Right", " R"),
             MB_FFT_METERS("_l", " Left", " L"),
@@ -437,6 +441,7 @@ namespace lsp
             MB_GATE_SHM_LINK_STEREO,
             MB_GATE_PREMIX,
             MB_COMMON(gate_sc_ms_bands),
+            MB_LINK("clink", "Mid/Side controls link", "M/S link"),
             MB_CHANNEL("_m", " Mid", " M"),
             MB_CHANNEL("_s", " Side", " S"),
             MB_FFT_METERS("_m", " Mid", " M"),
@@ -597,6 +602,7 @@ namespace lsp
             MB_GATE_SHM_LINK_STEREO,
             MB_GATE_SC_PREMIX,
             MB_COMMON(gate_sc_lr_bands),
+            MB_LINK("clink", "Left/Right controls link", "L/R link"),
             MB_CHANNEL("_l", " Left", " L"),
             MB_CHANNEL("_r", " Right", " R"),
             MB_FFT_METERS("_l", " Left", " L"),
@@ -666,6 +672,7 @@ namespace lsp
             MB_GATE_SHM_LINK_STEREO,
             MB_GATE_SC_PREMIX,
             MB_COMMON(gate_sc_ms_bands),
+            MB_LINK("clink", "Mid/Side controls link", "M/S link"),
             MB_CHANNEL("_m", " Mid", " M"),
             MB_CHANNEL("_s", " Side", " S"),
             MB_FFT_METERS("_m", " Mid", " M"),
