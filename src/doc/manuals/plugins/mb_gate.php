@@ -37,7 +37,7 @@
 	<ul>
 		<li>Unlike classic crossovers which use IIR (Infinite Impulse Response) filters to split signal into multiple bands and shift the phase
 		of the audio signal at band split points, the <b>Linear Phase</b> allows to use FIR (Finite Impulse Response) filters which are deprived of this.
-		<li>Unlike most IIR filters which are designed using bilinear transform, linear phase filters allow to simulate their tranfer function
+		<li>Unlike most IIR filters which are designed using bilinear transform, linear phase filters allow to simulate their transfer function
 		to look like the transfer function of analog filters, without deforming it's magnitude envelope near the nyquist frequency.</li>
 		<li>Unlike design of classic Linkwitz-Riley filters, the design of IIR filters provides shorter transition zone of the filter.</li>
 	</ul>
@@ -82,10 +82,15 @@
 	<li><b>Link</b> - the name of shared memory link used to receive sidechain signal</li>
 	<li><b>FFT<?= $sm ?> In</b> - enables FFT curve graph of input signal on the spectrum graph.</li>
 	<li><b>FFT<?= $sm ?> Out</b> - enables FFT curve graph of output signal on the spectrum graph.</li>
-	<li><b>Filters<?= $sm ?></b> - enables drawing tranfer function of each sidechain filter on the spectrum graph.</li>
+	<li><b>Pre-mix</b> - shows pre-mix control overlay.</li>
 	<?php if ($m == 's') { ?>
-	<li><b>Stereo Split</b> - enables independent processing of left and right channels.</li>
+		<li><b>Stereo Split</b> - enables independent processing of left and right channels.</li>
+	<?php } elseif ($m == 'lr') { ?>
+		<li><b>L/R Link</b> - enables linking between Left and Right channel controls so change of one forces the sibling to become the same value.</li>
+	<?php } elseif ($m == 'ms') { ?>
+		<li><b>M/S Link</b> - enables linking between Mid and Side channel controls so change of one forces the sibling to become the same value.</li>
 	<?php } ?>
+	<li><b>Filters<?= $sm ?></b> - enables drawing transfer function of each sidechain filter on the spectrum graph.</li>
 	<li><b>Zoom</b> - zoom fader, allows to adjust zoom on the frequency chart.</li>
 </ul>
 <p><b>'Signal' section:</b></p>
@@ -189,3 +194,18 @@
 	<li><b>Gate Hysteresis Thresh</b> - the threshold of additional hysteresis curve</li>
 	<li><b>Gate Hysteresis Zone</b> - the size of the transition zone below the hysteresis threshold</li>
 </ul>
+
+<p><b>Pre-mix control overlay:</b></p>
+<ul>
+	<?php if ($sc) { ?>
+	<li><b>In -> SC</b> - the amount of signal from input channel added to the Sidechain.</li>
+	<?php } ?>
+	<li><b>In -> Link</b> - the amount of signal from input channel added to the shared memory link.</li>
+	<?php if ($sc) { ?>
+	<li><b>SC -> In</b> - the amount of signal from sidechain input channel added to the input channel.</li>
+	<li><b>SC -> Link</b> - the amount of signal from sidechain input channel added to the shared memory link.</li>
+	<?php } ?>
+	<li><b>Link -> In</b> - the amount of signal from shared memory link added to the input channel.</li>
+	<li><b>Link -> SC</b> - the amount of signal from shared memory link added to the sidechain channel.</li>
+</ul>
+
