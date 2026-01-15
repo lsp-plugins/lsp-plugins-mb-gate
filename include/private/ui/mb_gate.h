@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 6 дек. 2023 г.
@@ -73,7 +73,12 @@ namespace lsp
 
             public:
                 explicit mb_gate_ui(const meta::plugin_t *meta);
+                mb_gate_ui(const mb_gate_ui &) = delete;
+                mb_gate_ui(mb_gate_ui &&) = delete;
                 virtual ~mb_gate_ui() override;
+
+                mb_gate_ui & operator = (const mb_gate_ui &) = delete;
+                mb_gate_ui & operator = (mb_gate_ui &&) = delete;
 
                 virtual status_t    post_init() override;
 
