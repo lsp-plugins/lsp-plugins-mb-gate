@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 3 авг. 2021 г.
@@ -20,6 +20,7 @@
  */
 
 #include <lsp-plug.in/plug-fw/meta/ports.h>
+#include <lsp-plug.in/plug-fw/meta/registry.h>
 #include <lsp-plug.in/shared/meta/developers.h>
 #include <lsp-plug.in/dsp-units/util/Sidechain.h>
 #include <private/meta/mb_gate.h>
@@ -777,6 +778,7 @@ namespace lsp
             mono_plugin_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(mb_gate_mono);
 
         const meta::plugin_t  mb_gate_stereo =
         {
@@ -807,6 +809,7 @@ namespace lsp
             stereo_plugin_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(mb_gate_stereo);
 
         const meta::plugin_t  mb_gate_lr =
         {
@@ -837,6 +840,7 @@ namespace lsp
             stereo_plugin_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(mb_gate_lr);
 
         const meta::plugin_t  mb_gate_ms =
         {
@@ -867,7 +871,7 @@ namespace lsp
             stereo_plugin_port_groups,
             &mb_gate_bundle
         };
-
+        LSP_REGISTER_METADATA(mb_gate_ms);
 
         const meta::plugin_t  sc_mb_gate_mono =
         {
@@ -898,6 +902,7 @@ namespace lsp
             mono_plugin_sidechain_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(sc_mb_gate_mono);
 
         const meta::plugin_t  sc_mb_gate_stereo =
         {
@@ -928,6 +933,7 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(sc_mb_gate_stereo);
 
         const meta::plugin_t  sc_mb_gate_lr =
         {
@@ -958,6 +964,7 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(sc_mb_gate_lr);
 
         const meta::plugin_t  sc_mb_gate_ms =
         {
@@ -988,5 +995,7 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
         };
+        LSP_REGISTER_METADATA(sc_mb_gate_ms);
+
     } /* namespace meta */
 } /* namespace lsp */
