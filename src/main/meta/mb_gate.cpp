@@ -773,7 +773,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_mono_ports,
-            "dynamics/gate/multiband/mono.xml",
+            "plugins/dynamics/gate/multiband/mono.xml",
             NULL,
             mono_plugin_port_groups,
             &mb_gate_bundle
@@ -804,7 +804,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_stereo_ports,
-            "dynamics/gate/multiband/stereo.xml",
+            "plugins/dynamics/gate/multiband/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
             &mb_gate_bundle
@@ -835,7 +835,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_lr_ports,
-            "dynamics/gate/multiband/lr.xml",
+            "plugins/dynamics/gate/multiband/lr.xml",
             NULL,
             stereo_plugin_port_groups,
             &mb_gate_bundle
@@ -866,7 +866,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             mb_gate_ms_ports,
-            "dynamics/gate/multiband/ms.xml",
+            "plugins/dynamics/gate/multiband/ms.xml",
             NULL,
             stereo_plugin_port_groups,
             &mb_gate_bundle
@@ -897,7 +897,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_mono_ports,
-            "dynamics/gate/multiband/mono.xml",
+            "plugins/dynamics/gate/multiband/mono.xml",
             NULL,
             mono_plugin_sidechain_port_groups,
             &mb_gate_bundle
@@ -928,7 +928,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_stereo_ports,
-            "dynamics/gate/multiband/stereo.xml",
+            "plugins/dynamics/gate/multiband/stereo.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
@@ -959,7 +959,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_lr_ports,
-            "dynamics/gate/multiband/lr.xml",
+            "plugins/dynamics/gate/multiband/lr.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
@@ -990,7 +990,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_mb_gate_ms_ports,
-            "dynamics/gate/multiband/ms.xml",
+            "plugins/dynamics/gate/multiband/ms.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
             &mb_gate_bundle
