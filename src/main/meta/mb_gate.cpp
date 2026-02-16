@@ -776,7 +776,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/mono.xml",
             NULL,
             mono_plugin_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            3
         };
         LSP_REGISTER_METADATA(mb_gate_mono);
 
@@ -807,7 +808,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/stereo.xml",
             NULL,
             stereo_plugin_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            1
         };
         LSP_REGISTER_METADATA(mb_gate_stereo);
 
@@ -838,7 +840,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/lr.xml",
             NULL,
             stereo_plugin_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            5
         };
         LSP_REGISTER_METADATA(mb_gate_lr);
 
@@ -869,7 +872,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/ms.xml",
             NULL,
             stereo_plugin_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            7
         };
         LSP_REGISTER_METADATA(mb_gate_ms);
 
@@ -900,7 +904,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/mono.xml",
             NULL,
             mono_plugin_sidechain_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            4
         };
         LSP_REGISTER_METADATA(sc_mb_gate_mono);
 
@@ -931,7 +936,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/stereo.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            2
         };
         LSP_REGISTER_METADATA(sc_mb_gate_stereo);
 
@@ -962,7 +968,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/lr.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            6
         };
         LSP_REGISTER_METADATA(sc_mb_gate_lr);
 
@@ -993,7 +1000,8 @@ namespace lsp
             "plugins/dynamics/gate/multiband/ms.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &mb_gate_bundle
+            &mb_gate_bundle,
+            8
         };
         LSP_REGISTER_METADATA(sc_mb_gate_ms);
 

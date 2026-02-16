@@ -4,14 +4,13 @@
 		"name": "Multiband Gate"
 	},
 	"launcher": {
-		"mb_gate_lr": "Split LR",
+		"mb_gate_lr": "LR",
 		"mb_gate_mono": "Mono",
-		"mb_gate_ms": "Split MS",
+		"mb_gate_ms": "MS",
 		"mb_gate_stereo": "Stereo",
-		"sc_mb_gate_lr": "SC Split LR",
+		"sc_mb_gate_lr": "SC LR",
 		"sc_mb_gate_mono": "SC Mono",
-		"sc_mb_gate_ms": "SC Split MS",
+		"sc_mb_gate_ms": "SC MS",
 		"sc_mb_gate_stereo": "SC Stereo"
 	}
 }
-
