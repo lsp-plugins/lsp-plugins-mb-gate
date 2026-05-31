@@ -3,6 +3,7 @@
 *******************************************************************************
 
 === 1.0.32 ===
+* Re-numbered labels in plugins' metadata starting with 1.
 * Updated build scripts and dependencies.
 
 === 1.0.31 ===
