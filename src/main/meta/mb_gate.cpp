@@ -210,9 +210,9 @@ namespace lsp
             SWITCH("bm" id, "Mute band" label, "Mute" alias, 0.0f), \
             \
             SWITCH("gh" id, "Hysteresis" label, "Hysteresis" alias, 0.0f), \
-            LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, mb_gate_metadata::THRESHOLD), \
+            EXT_LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, mb_gate_metadata::THRESHOLD), \
             LOG_CONTROL("gz" id, "Curve zone size" label, "Size" alias, U_GAIN_AMP, mb_gate_metadata::ZONE), \
-            LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, mb_gate_metadata::H_THRESHOLD), \
+            EXT_LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, mb_gate_metadata::H_THRESHOLD), \
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, "Hyst size" alias, U_GAIN_AMP, mb_gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack time" label, "Att time" alias, U_MSEC, mb_gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release time" label, "Rel time" alias, U_MSEC, mb_gate_metadata::RELEASE_TIME), \

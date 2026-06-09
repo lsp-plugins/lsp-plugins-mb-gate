@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 3 авг. 2021 г.
@@ -1998,15 +1998,14 @@ namespace lsp
             // Draw axis
             cv->set_line_width(1.0);
 
-            // "-72 db / (:zoom ** 3)" max="24 db * :zoom"
-
-            float miny  = logf(GAIN_AMP_M_72_DB / dsp::ipowf(fZoom, 3));
-            float maxy  = logf(GAIN_AMP_P_24_DB * fZoom);
+            const float zcoef = powf(fZoom, 4.5f);
+            float miny  = logf(GAIN_AMP_M_108_DB / zcoef);
+            float maxy  = logf(GAIN_AMP_P_12_DB * sqrtf(fZoom));
 
             float zx    = 1.0f/SPEC_FREQ_MIN;
-            float zy    = dsp::ipowf(fZoom, 3)/GAIN_AMP_M_72_DB;
-            float dx    = width/(logf(SPEC_FREQ_MAX)-logf(SPEC_FREQ_MIN));
-            float dy    = height/(miny-maxy);
+            float zy    = zcoef/GAIN_AMP_M_108_DB;
+            float dx    = width/(logf(SPEC_FREQ_MAX / SPEC_FREQ_MIN));
+            float dy    = height/(miny - maxy);
 
             // Draw vertical lines
             cv->set_color_rgb(CV_YELLOW, 0.5f);
@@ -2018,7 +2017,7 @@ namespace lsp
 
             // Draw horizontal lines
             cv->set_color_rgb(CV_WHITE, 0.5f);
-            for (float i=GAIN_AMP_M_72_DB; i<GAIN_AMP_P_24_DB; i *= GAIN_AMP_P_12_DB)
+            for (float i=GAIN_AMP_M_96_DB; i<GAIN_AMP_P_12_DB; i *= GAIN_AMP_P_12_DB)
             {
                 float ay = height + dy*(logf(i*zy));
                 cv->line(0, ay, width, ay);
