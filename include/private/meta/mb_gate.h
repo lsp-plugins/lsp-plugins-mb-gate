@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-mb-gate
  * Created on: 3 авг. 2021 г.
@@ -54,12 +54,12 @@ namespace lsp
             static constexpr float  OUT_FREQ_DFL                = 1000.0f;
             static constexpr float  OUT_FREQ_STEP               = 0.002f;
 
-            static constexpr float  THRESHOLD_MIN               = GAIN_AMP_M_60_DB;
+            static constexpr float  THRESHOLD_MIN               = GAIN_AMP_M_96_DB;
             static constexpr float  THRESHOLD_MAX               = GAIN_AMP_0_DB;
             static constexpr float  THRESHOLD_DFL               = GAIN_AMP_M_24_DB;
             static constexpr float  THRESHOLD_STEP              = 0.05f;
 
-            static constexpr float  H_THRESHOLD_MIN             = GAIN_AMP_M_60_DB;
+            static constexpr float  H_THRESHOLD_MIN             = GAIN_AMP_M_96_DB;
             static constexpr float  H_THRESHOLD_MAX             = GAIN_AMP_0_DB;
             static constexpr float  H_THRESHOLD_DFL             = GAIN_AMP_M_12_DB;
             static constexpr float  H_THRESHOLD_STEP            = 0.05f;
@@ -107,13 +107,13 @@ namespace lsp
             static constexpr float  ZOOM_MIN                    = GAIN_AMP_M_18_DB;
             static constexpr float  ZOOM_MAX                    = GAIN_AMP_0_DB;
             static constexpr float  ZOOM_DFL                    = GAIN_AMP_0_DB;
-            static constexpr float  ZOOM_STEP                   = 0.0125f;
+            static constexpr float  ZOOM_STEP                   = 0.0025f;
 
             static constexpr size_t MESH_POINTS                 = 640;
 
             static constexpr size_t CURVE_MESH_SIZE             = 256;
-            static constexpr float  CURVE_DB_MIN                = -72;
-            static constexpr float  CURVE_DB_MAX                = +24;
+            static constexpr float  CURVE_DB_MIN                = -108;
+            static constexpr float  CURVE_DB_MAX                = +12;
 
             static constexpr float  FREQ_BOOST_MIN              = 10.0f;
             static constexpr float  FREQ_BOOST_MAX              = 20000.0f;
@@ -123,10 +123,10 @@ namespace lsp
             static constexpr size_t FFT_MESH_POINTS             = MESH_POINTS;
             static constexpr size_t FFT_WINDOW                  = dspu::windows::HANN;
             static constexpr size_t FFT_REFRESH_RATE            = 20;
-            static constexpr float  FFT_REACT_TIME_MIN          = 0.000;
-            static constexpr float  FFT_REACT_TIME_MAX          = 1.000;
-            static constexpr float  FFT_REACT_TIME_DFL          = 0.200;
-            static constexpr float  FFT_REACT_TIME_STEP         = 0.001;
+            static constexpr float  FFT_REACT_TIME_MIN          = 0.000f;
+            static constexpr float  FFT_REACT_TIME_MAX          = 1.000f;
+            static constexpr float  FFT_REACT_TIME_DFL          = 0.200f;
+            static constexpr float  FFT_REACT_TIME_STEP         = 0.001f;
 
             static constexpr size_t FFT_XOVER_RANK_MIN          = 12;
             static constexpr size_t FFT_XOVER_FREQ_MIN          = 44100;

@@ -31,15 +31,15 @@
 						</ui:for>
 						<marker v="20000"/>
 						<ui:with ox="1" oy="0">
-							<marker v="+12 db"/>
 							<marker v="-12 db"/>
 							<marker v="-36 db"/>
 							<marker v="-60 db"/>
+							<marker v="-84 db"/>
 
-							<ui:for id="g" first="-42" last="6" step="12">
+							<ui:for id="g" first="-66" last="6" step="12">
 								<marker v="${g} db" visibility=":zoom le -9 db"/>
 							</ui:for>
-							<ui:for id="g" first="-21" last="3" step="6">
+							<ui:for id="g" first="-45" last="3" step="6">
 								<marker v="${g} db" visibility=":zoom le -15 db"/>
 							</ui:for>
 						</ui:with>
@@ -53,6 +53,8 @@
 						<marker value="0 db" ox="1" oy="0"/>
 						<marker value="-24 db" ox="1" oy="0"/>
 						<marker value="-48 db" ox="1" oy="0"/>
+						<marker value="-72 db" ox="1" oy="0"/>
+						<marker value="-96 db" ox="1" oy="0"/>
 					</ui:with>
 
 					<!-- Piano keys -->
@@ -66,7 +68,6 @@
 							<text x="midi_freq(12 * ${:octave + 1})" text="lists.notes.fmt.c" text:octave="${octave}" valign="1" halign="0"/>
 						</ui:for>
 					</ui:with>
-
 					<!-- Band markers -->
 					<ui:with
 						width="2"
@@ -111,19 +112,15 @@
 					<mesh id="ag_l" width="3" color="left" smooth="true"/>
 					<mesh id="ag_r" width="3" color="right" smooth="true"/>
 
-					<!-- Boundaries -->
-					<marker v="1" ox="2" oy="0" color="graph_prim" visibility="false"/>
-					<marker v="24000" color="graph_prim" visibility="false"/>
-
 					<!-- Axis -->
 					<axis min="10" max="24000" angle="0.0" log="true" visibility="false"/>
-					<axis min="-72 db / (:zoom ** 3)" max="24 db * :zoom" color="graph_prim" angle="0.5" log="true"/>
+					<axis min="-108 db / (:zoom ** 4.5)" max="12 db * (:zoom ** 0.5)" color="graph_prim" angle="0.5" log="true"/>
 					<axis min="-1" max="1" visibility="false" angle="0.5"/>
-					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
+					<axis min="-108 db" max="12 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 					<axis min="0" max=":_a_scaled_height" visibility="false" angle="0.5"/>
 
 					<!-- Text -->
-					<ui:with ox="0" oy="2" y="0" halign="1" valign="1">
+					<ui:with ox="0" oy="2" y="0" halign="1" valign="1" pgroup="0" priority="0">
 						<text x="10" text="graph.units.hz"/>
 						<text x="20" text="20"/>
 						<text x="30" text="30"/>
@@ -140,15 +137,15 @@
 						<text x="20000" text="graph.values.x_k" text:value="20"/>
 					</ui:with>
 
-					<ui:with x="10" halign="1" valign="1">
-						<ui:for id="g" first="-60" last="12" step="12">
+					<ui:with x="10" halign="1" valign="1" pgroup="0" priority="10">
+						<ui:for id="g" first="-96" last="12" step="12">
 							<text y="${g} db" text="${g}"/>
 						</ui:for>
 						<text y="0 db" ox="0" oy="2" text="graph.units.db" valign="-1"/>
-						<ui:for id="g" first="-42" last="6" step="12">
+						<ui:for id="g" first="-66" last="6" step="12">
 							<text y="${g} db" text="${g}" visibility=":zoom le -9 db"/>
 						</ui:for>
-						<ui:for id="g" first="-21" last="3" step="6">
+						<ui:for id="g" first="-45" last="3" step="6">
 							<text y="${g} db" text="${g}" visibility=":zoom le -15 db"/>
 						</ui:for>
 					</ui:with>
@@ -652,23 +649,21 @@
 									<origin hpos="-1" vpos="-1" visible="false"/>
 
 									<!-- Gray grid -->
-									<ui:for id="g" first="-60" last="12" step="24">
+									<ui:for id="g" first="-84" last="12" step="24">
 										<marker v="${g} db" color="graph_alt_1"/>
 										<marker v="${g} db" ox="1" oy="0" color="graph_alt_1"/>
 									</ui:for>
-
+			
 									<!-- Yellow grid -->
-									<ui:for id="g" first="-48" last="-24" step="24">
+									<ui:for id="g" first="-96" last="-24" step="24">
 										<marker v="${g} db" color="graph_sec"/>
 										<marker v="${g} db" ox="1" oy="0" color="graph_sec"/>
 									</ui:for>
 
 									<!-- Axes and boundaries -->
 									<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true"/>
-									<marker v="24 db" color="graph_alt_1" visibility="false"/>
-									<marker v="24 db" ox="1" oy="0" color="graph_alt_1" visibility="false"/>
-									<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
-									<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
+									<axis min="-108 db" max="12 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
+									<axis min="-108 db" max="12 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 
 									<!-- 0 dB markers -->
 									<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim"/>
@@ -694,26 +689,30 @@
 									<marker v=":gt_${i}r * :ht_${i}r" color="attack_2" visibility=":gh_${i}r"/>
 
 									<!-- Text -->
-									<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
-									<ui:attributes x="0 db" halign="1" valign="-1">
-										<text y="24 db" text="graph.units.db"/>
-										<text y="12 db" text="+12"/>
+									<text x="0 db" y="0 db" text="0" halign="1" valign="1" pgroup="0" priority="0"/>
+									<ui:attributes x="0 db" halign="1" valign="-1" pgroup="0" priority="10">
+										<text y="12 db" text="graph.units.db" halign="-1" priority="0" />
 										<text y="-12 db" text="-12"/>
 										<text y="-24 db" text="-24"/>
 										<text y="-36 db" text="-36"/>
 										<text y="-48 db" text="-48"/>
 										<text y="-60 db" text="-60"/>
-										<text y="-72 db" text="graph.axis.out" valign="1"/>
+										<text y="-72 db" text="-72"/>
+										<text y="-84 db" text="-84"/>
+										<text y="-96 db" text="-96"/>
+										<text y="-108 db" text="graph.axis.out" valign="1" priority="0"/>
 									</ui:attributes>
-									<ui:attributes y="0 db" halign="-1" valign="1">
-										<text x="24 db" text="graph.units.db"/>
-										<text x="12 db" text="+12"/>
+									<ui:attributes y="0 db" halign="-1" valign="1" pgroup="0" priority="10">
+										<text x="12 db" text="graph.units.db" valign="-1" priority="0" />
 										<text x="-12 db" text="-12"/>
 										<text x="-24 db" text="-24"/>
 										<text x="-36 db" text="-36"/>
 										<text x="-48 db" text="-48"/>
 										<text x="-60 db" text="-60"/>
-										<text x="-72 db" text="graph.axis.in" halign="1"/>
+										<text x="-72 db" text="-72"/>
+										<text x="-84 db" text="-84"/>
+										<text x="-96 db" text="-96"/>
+										<text x="-108 db" text="graph.axis.in" halign="1" priority="0"/>
 									</ui:attributes>
 								</graph>
 							</group>
@@ -722,8 +721,8 @@
 							<void bg.color="bg" height="4" vreduce="true"/>
 							<label text="labels.gain_" bg.color="bg_schema" pad.v="4"/>
 							<ledmeter vexpand="true" height.min="256" angle="1">
-								<ledchannel id="rlm_${i}l" min="-72 db" max="24 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="bright_blue"/>
-								<ledchannel id="rlm_${i}r" min="-72 db" max="24 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="bright_blue"/>
+								<ledchannel id="rlm_${i}l" min="-108 db" max="0 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="bright_blue"/>
+								<ledchannel id="rlm_${i}r" min="-108 db" max="0 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="bright_blue"/>
 							</ledmeter>
 						</vbox>
 					</hbox>
