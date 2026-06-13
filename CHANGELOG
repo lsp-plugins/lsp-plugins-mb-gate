@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.33 ===
+* Updated build scripts and dependencies.
+
 === 1.0.32 ===
 * Extended dynamics range for the gain curve setup.
 * Re-numbered labels in plugins' metadata starting with 1.
