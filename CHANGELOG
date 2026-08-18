@@ -3,7 +3,7 @@
 *******************************************************************************
 
 === 1.0.35 ===
-
+* Updated build scripts and dependencies.
 
 === 1.0.34 ===
 * The Input Gain knob now controls the gain of input signal only and does not
