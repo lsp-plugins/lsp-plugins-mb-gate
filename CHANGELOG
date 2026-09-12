@@ -4,6 +4,7 @@
 
 === 1.0.36 ===
 * Optimized CPU consumption: FFT analysis is not performed when UI is not active.
+* Added possibility to change the crossover slope.
 
 === 1.0.35 ===
 * Updated build scripts and dependencies.
