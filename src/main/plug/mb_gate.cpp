@@ -620,8 +620,6 @@ namespace lsp
 
                 if (!c->sXOver.init(meta::mb_gate_metadata::BANDS_MAX, MBG_BUFFER_SIZE))
                     return;
-                for (size_t j=0; j<meta::mb_gate_metadata::BANDS_MAX; ++j)
-                    c->sXOver.set_handler(j, process_band, this, c);                // Bind channel as a handler
 
                 c->nPlanSize    = 0;
                 c->vIn          = NULL;
@@ -1454,6 +1452,13 @@ namespace lsp
                 c->sDryDelay.init(max_delay);
                 c->sXOverDelay.init(max_delay);
                 c->sDryEq.set_sample_rate(sr);
+
+                // Bid buffers for IIR crossover
+                for (size_t j=0; j<meta::mb_gate_metadata::BANDS_MAX; ++j)
+                {
+                    gate_band_t * const b   = &c->vBands[j];
+                    c->sXOver.bind_buffer(j, b->vBuffer);                   // Bind buffer to store channel data
+                }
 
                 // Need to re-initialize FFT crossover?
                 if (fft_rank != c->sLPXOver.rank())
